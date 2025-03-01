@@ -4,34 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohammed Jabir - Portfolio</title>
+     <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- CSS Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <div class="nav-container">
+        <a href="#hero" class="logo">Mohammed Jabir</a>
+        <div class="hamburger" id="hamburger">
+           <span></span>
+           <span></span>
+           <span></span>
+        </div>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>  
     <main>
-        <section id="hero">
-            <div id="particles-background" class="background-animation"></div>
-            <h1>Mohammed Jabir</h1>
-            <p>Data Science Enthusiast & Developer</p>
-            <button>View Projects</button>
-        </section>
+      <section id="hero">
+        <div id="particles-background" class="background-animation"></div>
+          <div class="hero-content">
+            <!-- Text on the Left -->
+            <div class="hero-text">
+                <h1>Mohammed Jabir</h1>
+                <p>Data Science Enthusiast & Developer</p>
+                <button>View Projects</button>
+            </div>
+    
+            <!-- Image on the Right -->
+            <div class="hero-image-container">
+                <img src="images/hero2.png" alt="Mohammed Jabir" class="hero-image" />
+            </div>
+          </div>
+      </section>    
         <section id="about">
-            <img src="images\headshot.webp" alt="Mohammed Jabir" class="headshot">
+            <img src="images\hero.png" alt="Mohammed Jabir" class="headshot">
             <div class="bio">
                 <p>I’m a self-taught data science enthusiast with a passion for uncovering insights from data. Through dedicated study, I’ve built expertise in Python, Pandas, and machine learning techniques, applying these skills in projects like Data Analysis on Kaggle datasets. My journey began with online resources like Coursera and Kaggle, and I continue to explore advanced topics to solve real-world problems.</p>
             </div>
+            <!-- Skills Visualization Container -->
             <div class="skills-visualization">
-                <!-- Placeholder for interactive skills chart -->
+              <!-- The 3D chart (Years Experience, Completed Projects, Happy Clients) will be rendered here -->
             </div>
             <div class="timeline">
                 <div class="timeline-item">
@@ -130,6 +152,5 @@
     <!-- Font Awesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
-
 </body>
 </html>

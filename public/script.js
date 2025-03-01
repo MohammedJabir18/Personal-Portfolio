@@ -71,6 +71,56 @@ particlesJS('particles-background', {
     "retina_detect": true // High-resolution support
   });
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+  
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+  });  
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get the existing container (already styled as a box)
+    const container = document.querySelector('.skills-visualization');
+
+    // Define your metrics data with the new metric "Happy Clients"
+    const metrics = [
+        { label: 'Certifications', value: '8+' },
+        { label: 'Completed Projects', value: '20+' },
+        { label: 'Happy Clients', value: '15+' }
+    ];
+
+    // Inject a flex container for the metrics inside the existing box,
+    // placing the metric value on top and the label below it
+    container.innerHTML = `
+        <div class="metrics-container">
+            ${metrics.map(metric => `
+                <div class="metric">
+                    <p class="metric-value">${metric.value}</p>
+                    <h3 class="metric-label">${metric.label}</h3>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    // Apply a fade-in animation with staggered delays to each metric
+    const metricElements = document.querySelectorAll('.metric');
+    metricElements.forEach((el, i) => {
+        // Set initial state for animation
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            el.style.opacity = 1;
+            el.style.transform = 'translateY(0)';
+        }, i * 200);
+    });
+  });
+
+
+
+
 // Social Media Hover Effects
 document.addEventListener("DOMContentLoaded", () => {
     const socialLinks = document.querySelectorAll(".social-links a");
@@ -88,34 +138,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
   
+  
   // 2. Animate Skill Progress Bars when Section is in View
   const aboutSection = document.querySelector('#about');
-const skillsSection = document.querySelector('#skills');
-const timelineItems = document.querySelectorAll('.timeline-item');
-const progressBars = document.querySelectorAll('.progress');
+  const skillsSection = document.querySelector('#skills');
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const progressBars = document.querySelectorAll('.progress');
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      if (entry.target === aboutSection) {
-        timelineItems.forEach((item, index) => {
-          item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-          setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transform = 'translateY(0)';
-          }, index * 300); // Staggered animation
-        });
-        observer.unobserve(aboutSection);
-      } else if (entry.target === skillsSection) {
-        progressBars.forEach(bar => {
-          const level = bar.getAttribute('data-level');
-          bar.style.width = `${level}%`;
-        });
-        observer.unobserve(skillsSection);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (entry.target === aboutSection) {
+          timelineItems.forEach((item, index) => {
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            setTimeout(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'translateY(0)';
+            }, index * 300); // Staggered animation
+          });
+          observer.unobserve(aboutSection);
+        } else if (entry.target === skillsSection) {
+          progressBars.forEach(bar => {
+            const level = bar.getAttribute('data-level');
+            bar.style.width = `${level}%`;
+          });
+          observer.unobserve(skillsSection);
+        }
       }
-    }
-  });
-}, { threshold: 0.5 });
+    });
+  }, { threshold: 0.5 });
 
 observer.observe(aboutSection);
 observer.observe(skillsSection);
