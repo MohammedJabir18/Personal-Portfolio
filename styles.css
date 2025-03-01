@@ -1,0 +1,387 @@
+/* Global Styles */
+body {
+    background-color: #0A1128; /* Deep navy background */
+    color: #FFFFFF; /* White text for contrast */
+    font-family: 'Roboto', sans-serif; /* Modern sans-serif font */
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth; /* Smooth scrolling for navigation */
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #0A1128; /* Matches body background */
+    padding: 10px 0;
+    z-index: 1000; /* Ensures header stays on top */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: 0 15px; /* Spacing between nav items */
+}
+
+nav a {
+    color: #9D4EDD; /* Neon purple for links */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+nav a:hover {
+    color: #00FFFF; /* Vibrant cyan on hover */
+}
+
+/* Hero Section */
+#hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+}
+
+#hero h1 {
+    font-size: 4em; /* Large name */
+    margin: 0;
+    opacity: 0;
+    animation: fadeIn 2s forwards;   
+}
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+#hero p {
+    font-size: 1.5em; /* Subtitle size */
+    margin: 10px 0;
+}
+
+#hero button {
+    background-color: transparent;
+    border: 2px solid #9D4EDD; /* Neon purple border */
+    color: #9D4EDD;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s; /* Smooth transition for hover */
+}
+
+#hero button:hover {
+    background-color: #9D4EDD; /* Neon purple background */
+    color: #FFFFFF; /* White text */
+}
+
+#particles-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind other hero content */
+}
+
+/* About Section */
+#about {
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headshot {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px; /* Space below headshot */
+}
+
+.bio {
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.skills-visualization {
+    width: 100%;
+    height: 300px;
+    background-color: #1A1A2E; /* Darker navy placeholder */
+    margin-bottom: 20px;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timeline-item {
+    margin: 10px 0; /* Spacing between timeline items */
+}
+
+/* Projects Section */
+#projects {
+    padding: 50px 20px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-buttons button {
+    background-color: transparent;
+    border: 2px solid #3A86FF; /* Electric blue border */
+    color: #3A86FF;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-buttons button:hover {
+    background-color: #3A86FF; /* Electric blue background */
+    color: #FFFFFF;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #1A1A2E; /* Darker navy card */
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s; /* Smooth scaling on hover */
+}
+
+.project-card:hover {
+    transform: scale(1.05); /* Slight scale-up effect */
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.technologies {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.links a {
+    color: #00FFFF; /* Vibrant cyan links */
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+
+/* Skills Section */
+#skills {
+    padding: 50px 20px;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skill-category {
+    margin: 20px;
+}
+
+.skill {
+    margin: 10px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #1A1A2E;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress {
+    height: 100%;
+    background-color: #3A86FF;
+    width: 0; /* Starts at 0, animated by JS */
+    transition: width 1s ease-in-out;
+}
+
+/* Contact Section */
+#contact {
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contact-form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+#contact-form input,
+#contact-form textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #9D4EDD; /* Neon purple border */
+    background-color: #1A1A2E; /* Darker navy background */
+    color: #FFFFFF;
+}
+
+/* Send Message Button Styles */
+#contact-form button {
+    background-color: #9D4EDD;          /* Neon purple background */
+    color: #FFFFFF;                     /* White text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    position: relative;
+    overflow: hidden;                   /* Prevents animation overflow */
+    transition: all 0.3s ease;
+}
+
+#contact-form button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(0, 255, 255, 0.5), transparent);
+    transition: all 0.5s ease;
+}
+
+#contact-form button:hover::before {
+    left: 100%;                         /* Slide animation on hover */
+}
+
+#contact-form button:hover {
+    background-color: #00FFFF;          /* Vibrant cyan background on hover */
+    color: #0A1128;                     /* Dark text on hover */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);  /* Subtle glow on hover */
+    transform: translateY(-2px);        /* Lift effect on hover */
+}
+
+#contact-form button:active {
+    transform: translateY(0);           /* Button presses down on click */
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.social-links a {
+    margin: 0 10px;
+}
+
+.email-contact {
+    margin: 25px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gmail-icon {
+    font-size: 1.5em;
+    color: #EA4335; /* Gmail red color */
+}
+
+.copy-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #9D4EDD; /* Neon Purple */
+    transition: color 0.3s, transform 0.3s;
+}
+
+.copy-btn:hover {
+    color: #00FFFF; /* Vibrant Cyan on hover */
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+
+
+#map {
+    width: 100%;
+    height: 300px;
+    background-color: #1A1A2E; /* Placeholder for map */
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.social-link {
+    font-size: 2em;
+    color: #9D4EDD; /* Neon Purple */
+    transition: 0.5s;
+    position: relative;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 2px;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.social-link:hover::before {
+    opacity: 1;
+}
+
+.social-link:hover {
+    color: #00FFFF;
+    box-shadow: 0 0 2px transparent, 0 0 2px transparent, 0 0 2px transparent; /* Reduced glow intensity */
+    transform: scale(1.2); /* Slight zoom on hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0A1128; /* Deep navy footer */
+}

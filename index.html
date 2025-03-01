@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Jabir - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+            <div id="particles-background" class="background-animation"></div>
+            <h1>Mohammed Jabir</h1>
+            <p>Data Science Enthusiast & Developer</p>
+            <button>View Projects</button>
+        </section>
+        <section id="about">
+            <img src="images\headshot.webp" alt="Mohammed Jabir" class="headshot">
+            <div class="bio">
+                <p>A passionate data science enthusiast and developer with a keen interest in machine learning, web development, and innovative technologies.</p>
+            </div>
+            <div class="skills-visualization">
+                <!-- Placeholder for interactive skills chart (e.g., radial or hexagonal grid) -->
+            </div>
+            <a href="path/to/resume.pdf" download>Download Resume</a>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Education</h3>
+                    <p>Bachelor's in Computer Science - [University Name], [Year]</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Experience</h3>
+                    <p>Data Science Intern - [Company Name], [Year]</p>
+                </div>
+                <!-- Add more timeline items as needed -->
+            </div>
+        </section>
+        <section id="projects">
+            <div class="filter-buttons">
+                <button>All</button>
+                <button>Data Science</button>
+                <button>Web Development</button>
+            </div>
+            <div class="project-grid">
+                <div class="project-card" data-category="data-science">
+                    <h3>Project 1</h3>
+                    <p>Data Science Project</p>
+                </div>
+                <div class="project-card" data-category="web-development">
+                    <h3>Project 2</h3>
+                    <p>Web Development Project</p>
+                </div>
+            </div>
+        </section>
+        <section id="skills">
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill">
+                        <p>Python</p>
+                        <div class="progress-bar"><div class="progress" data-level="80"></div></div>
+                    </div>
+                    <div class="skill">
+                        <p>JavaScript</p>
+                        <div class="progress-bar">
+                            <div class="progress" data-level="10"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Science & ML</h3>
+                    <div class="skill">
+                        <p>Pandas</p>
+                        <div class="progress-bar">
+                            <div class="progress" data-level="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="email-contact">
+                <i class="fa-brands fa-google gmail-icon"></i> <!-- Gmail icon -->
+                <span id="email">jabirahmedz111@gmail.com</span>
+                <button class="copy-btn">
+                    <i data-lucide="copy"></i> <!-- Copy icon -->
+                </button>
+            </div>                      
+            <div class="social-links">
+                <a href="https://github.com/MohammedJabir18" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/mohammed--jabir/" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/mohammedjabir__/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://x.com/mohammedjabir__" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>            
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Mohammed Jabir. All rights reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+
+</body>
+</html>
