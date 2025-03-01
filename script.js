@@ -89,22 +89,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   
   // 2. Animate Skill Progress Bars when Section is in View
-  const skillsSection = document.querySelector('#skills');
-  const progressBars = document.querySelectorAll('.progress');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
+  const aboutSection = document.querySelector('#about');
+const skillsSection = document.querySelector('#skills');
+const timelineItems = document.querySelectorAll('.timeline-item');
+const progressBars = document.querySelectorAll('.progress');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      if (entry.target === aboutSection) {
+        timelineItems.forEach((item, index) => {
+          item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, index * 300); // Staggered animation
+        });
+        observer.unobserve(aboutSection);
+      } else if (entry.target === skillsSection) {
         progressBars.forEach(bar => {
-          const level = bar.getAttribute('data-level'); // e.g., "80" for 80%
+          const level = bar.getAttribute('data-level');
           bar.style.width = `${level}%`;
         });
-        observer.unobserve(skillsSection); // Stop observing after animation triggers
+        observer.unobserve(skillsSection);
       }
-    });
-  }, { threshold: 0.5 }); // Trigger when 50% of section is visible
-  
-  observer.observe(skillsSection);
+    }
+  });
+}, { threshold: 0.5 });
+
+observer.observe(aboutSection);
+observer.observe(skillsSection);
   
   // 3. Project Filtering by Category
   const filterButtons = document.querySelectorAll('.filter-buttons button');

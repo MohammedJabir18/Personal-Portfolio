@@ -100,6 +100,7 @@ nav a:hover {
 }
 
 /* About Section */
+/* About Section */
 #about {
     padding: 50px 20px;
     display: flex;
@@ -112,30 +113,101 @@ nav a:hover {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    margin-bottom: 20px; /* Space below headshot */
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.headshot:hover {
+    transform: scale(1.1);
 }
 
 .bio {
     max-width: 600px;
     text-align: center;
     margin-bottom: 20px;
+    color: #FFFFFF;
 }
 
 .skills-visualization {
     width: 100%;
-    height: 300px;
-    background-color: #1A1A2E; /* Darker navy placeholder */
+    max-width: 600px;
+    height: 200px;
+    background-color: #1A1A2E;
+    border: 2px solid #3A86FF;
     margin-bottom: 20px;
 }
 
 .timeline {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 600px;
+    margin-bottom: 20px;
 }
 
 .timeline-item {
-    margin: 10px 0; /* Spacing between timeline items */
+    background-color: #1A1A2E;
+    padding: 15px; /* Consistent padding */
+    border-radius: 10px;
+    border: 2px solid #3A86FF;
+    margin: 0 0 20px 0; /* Same margin for all items: 20px bottom */
+    opacity: 0; /* For animation */
+    transform: translateY(20px);
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0; /* Remove bottom margin from last item */
+}
+
+.timeline-item h3 {
+    color: #9D4EDD;
+    font-size: 1.5em;
+    margin: 0 0 10px 0; /* Consistent heading margin */
+}
+
+.timeline-item p {
+    margin: 5px 0; /* Consistent paragraph margin */
+    color: #FFFFFF;
+}
+
+.timeline-item strong {
+    color: #00FFFF;
+}
+
+.timeline-item a {
+    color: #00FFFF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.timeline-item a:hover {
+    color: #9D4EDD;
+}
+
+.resume-btn {
+    background-color: transparent;
+    border: 2px solid #9D4EDD;
+    color: #9D4EDD;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.resume-btn:hover {
+    background-color: #9D4EDD;
+    color: #FFFFFF;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .headshot {
+        width: 120px;
+        height: 120px;
+    }
+    .timeline-item h3 {
+        font-size: 1.3em;
+    }
+    .bio, .timeline {
+        padding: 0 10px;
+    }
 }
 
 /* Projects Section */
