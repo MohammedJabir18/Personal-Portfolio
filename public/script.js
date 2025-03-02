@@ -72,13 +72,43 @@ particlesJS('particles-background', {
   });
 
   document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-  
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    const overlay = document.querySelector('.overlay');
+
+    // Toggle menu on hamburger click
     hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.classList.toggle('no-scroll'); // Prevent scrolling when open
     });
-  });  
+
+    // Close menu when a nav link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
+    });
+
+    // Close menu when clicking overlay (outside the menu)
+    overlay.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    });
+
+    // Close menu when clicking outside (anywhere not in menu or hamburger)
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+    });
+});
 
   document.addEventListener('DOMContentLoaded', () => {
     // Get the existing container (already styled as a box)
