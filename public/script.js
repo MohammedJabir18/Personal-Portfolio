@@ -1,75 +1,75 @@
 // 1. Initialize particles.js for the Hero Section Background
-particlesJS('particles-background', {
-    "particles": {
-      "number": {
-        "value": 100, // Number of particles
-        "density": {
-          "enable": true,
-          "value_area": 800 // Density based on area
-        }
-      },
-      "color": {
-        "value": ["#9D4EDD", "#3A86FF", "#00FFFF"] // Neon purple, electric blue, vibrant cyan
-      },
-      "shape": {
-        "type": "circle", // Simple shape for neo-brutalism
-        "stroke": {
-          "width": 0,
-          "color": "#000000"
-        }
-      },
-      "opacity": {
-        "value": 0.7, // Visible but subtle
-        "random": true // Varying opacity for dynamic effect
-      },
-      "size": {
-        "value": 3, // Small size
-        "random": true // Varying sizes
-      },
-      "line_linked": {
-        "enable": true, // Connecting lines for data science theme
-        "distance": 120,
-        "color": "#FFFFFF", // White lines
-        "opacity": 0.4,
-        "width": 1
-      },
-      "move": {
+particlesJS('particles-js', {
+  "particles": {
+    "number": {
+      "value": 100, // Number of particles
+      "density": {
         "enable": true,
-        "speed": 2, // Slow movement
-        "direction": "none",
-        "random": true,
-        "straight": false,
-        "out_mode": "out",
-        "bounce": false
+        "value_area": 800 // Density based on area
       }
     },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": {
-        "onhover": {
-          "enable": true,
-          "mode": "grab" // Connects particles to cursor
-        },
-        "onclick": {
-          "enable": true,
-          "mode": "push" // Adds particles on click
-        },
-        "resize": true
+    "color": {
+      "value": ["#9D4EDD", "#3A86FF", "#00FFFF"] // Neon purple, electric blue, vibrant cyan
+    },
+    "shape": {
+      "type": "circle", // Simple shape for neo-brutalism
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      }
+    },
+    "opacity": {
+      "value": 0.5, // Reduced from 0.7 to be less distracting for entire page
+      "random": true // Varying opacity for dynamic effect
+    },
+    "size": {
+      "value": 3, // Small size
+      "random": true // Varying sizes
+    },
+    "line_linked": {
+      "enable": true, // Connecting lines for data science theme
+      "distance": 150,
+      "color": "#FFFFFF", // White lines
+      "opacity": 0.3, // Reduced from 0.4 to be less distracting
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 1.5, // Reduced from 2 to be less distracting
+      "direction": "none",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": true,
+        "mode": "grab" // Connects particles to cursor
       },
-      "modes": {
-        "grab": {
-          "distance": 200,
-          "line_linked": {
-            "opacity": 0.7
-          }
-        },
-        "push": {
-          "particles_nb": 4
-        }
-      }
+      "onclick": {
+        "enable": true,
+        "mode": "push" // Adds particles on click
+      },
+      "resize": true
     },
-    "retina_detect": true // High-resolution support
-  });
+    "modes": {
+      "grab": {
+        "distance": 200,
+        "line_linked": {
+          "opacity": 0.7
+        }
+      },
+      "push": {
+        "particles_nb": 4
+      }
+    }
+  },
+  "retina_detect": true // High-resolution support
+});
 
   document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
@@ -170,33 +170,34 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
   // 2. Animate Skill Progress Bars when Section is in View
-  const aboutSection = document.querySelector('#about');
-  const skillsSection = document.querySelector('#skills');
-  const timelineItems = document.querySelectorAll('.timeline-item');
-  const progressBars = document.querySelectorAll('.progress');
+// Replace your existing IntersectionObserver code with this:
+const aboutSection = document.querySelector('#about');
+const skillsSection = document.querySelector('#skills');
+const timelineItems = document.querySelectorAll('.timeline-item');
+const progressBars = document.querySelectorAll('.progress');
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        if (entry.target === aboutSection) {
-          timelineItems.forEach((item, index) => {
-            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'translateY(0)';
-            }, index * 300); // Staggered animation
-          });
-          observer.unobserve(aboutSection);
-        } else if (entry.target === skillsSection) {
-          progressBars.forEach(bar => {
-            const level = bar.getAttribute('data-level');
-            bar.style.width = `${level}%`;
-          });
-          observer.unobserve(skillsSection);
-        }
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      if (entry.target === aboutSection) {
+        timelineItems.forEach((item, index) => {
+          item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, index * 300); // Staggered animation
+        });
+        observer.unobserve(aboutSection);
+      } else if (entry.target === skillsSection) {
+        progressBars.forEach(bar => {
+          const level = bar.getAttribute('data-level');
+          bar.style.width = `${level}%`;
+        });
+        observer.unobserve(skillsSection);
       }
-    });
-  }, { threshold: 0.5 });
+    }
+  });
+}, { threshold: 0.1 }); // Lower threshold to 0.1 (10% visibility)
 
 observer.observe(aboutSection);
 observer.observe(skillsSection);
