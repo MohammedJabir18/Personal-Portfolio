@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +22,6 @@ const ContactForm: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -54,24 +53,52 @@ const ContactForm: React.FC = () => {
     return isValid;
   };
 
+  async function submitFormData(data) {
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzjx36eaG1IICX5ToJ28OrypL1hvZA8Ww2rHcbT0GzsiseYdHd5trvgp9UFX5l_vgvF9g/exec', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          name: data.name,
+          email: data.email,
+          message: data.message
+        }).toString()
+      });
+      
+      if (response.ok) {
+        console.log('Form submitted successfully to Google Sheets.');
+      } else {
+        console.error('Failed to submit to Google Sheets:', response.status);
+      }
+    } catch (error) {
+      console.error('Google Sheets Error:', error);
+    }
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+  
     if (!validateForm()) return;
-    
+  
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitMessage('Thanks for your message! I\'ll get back to you soon.');
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        setSubmitMessage('');
-      }, 5000);
-    }, 1500);
+  
+    const dataToSend = { ...formData }; // Capture form data before resetting
+  
+    emailjs
+      .send('service_35dhqcc', 'template_s1m4ycg', dataToSend, 'QPypT13m9YYMUUs0u')
+      .then(() => {
+        setSubmitMessage("Thanks for your message! I'll get back to you soon.");
+        setFormData({ name: '', email: '', message: '' });
+        submitFormData(dataToSend); // Call the function to send data to Google Sheets
+        setTimeout(() => setSubmitMessage(''), 5000);
+      })
+      .catch((error) => {
+        console.error('EmailJS Error:', error);
+        setSubmitMessage('Failed to send message. Please try again.');
+      })
+      .finally(() => setIsSubmitting(false));
   };
 
   return (
