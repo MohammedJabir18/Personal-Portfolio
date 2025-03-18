@@ -45,10 +45,10 @@ This portfolio website showcases my journey as a self-taught data scientist and 
 - 🔄 **Interactive**: Smooth animations and transitions
 - 🌙 **Dark Mode**: Toggle between light and dark themes
 
-## 📸 Preview
+## 📹 Preview
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/MohammedJabir18/Personal-Portfolio/main/src/assets/preview.png" alt="Portfolio Preview" width="800" />
+  <img src="https://github.com/MohammedJabir18/Personal-Portfolio/blob/main/assets/PortfolioWebsite.gif" alt="Portfolio Preview" width="800" />
 </div>
 
 ## 🚀 Getting Started
