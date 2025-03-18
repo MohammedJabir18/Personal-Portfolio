@@ -6,7 +6,7 @@
 
 <div align="center">
 
-![Portfolio Banner](https://raw.githubusercontent.com/MohammedJabir18/Personal-Portfolio/main/src/assets/readme-banner.png)
+<img width="500px" src="https://github.com/MohammedJabir18/Personal-Portfolio/blob/main/assets/DataScientist.png">
 
 [![Vercel Status](https://img.shields.io/badge/Vercel-Live-brightgreen?style=for-the-badge&logo=vercel)](http://jabir-portfolio.vercel.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/MohammedJabir18/Personal-Portfolio.git)
