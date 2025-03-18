@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,10 +45,16 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/70 backdrop-blur-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-gradient">MJ</Link>
+          <Link to="/" className="flex items-center space-x-3 group">
+            <Avatar className="h-10 w-10">
+              <AvatarImage src="/lovable-uploads/c7d31be7-4be5-41eb-9718-89ddccf2e6db.png" alt="Mohammed Jabir" className="object-contain" />
+              <AvatarFallback className="bg-neobrutalism-dark text-neobrutalism-purple">MJ</AvatarFallback>
+            </Avatar>
+            <span className="text-xl font-bold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-neobrutalism-purple after:via-neobrutalism-blue after:to-neobrutalism-cyan after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100">
+              Mohammed Jabir
+            </span>
+          </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-6">
               {navLinks.map((link) => (
@@ -59,24 +67,8 @@ const Navbar = () => {
                 </a>
               ))}
             </div>
-            
-            <div className="flex items-center space-x-4 ml-4">
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.ariaLabel}
-                  className="text-white hover:text-neobrutalism-purple transition-colors"
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)}
@@ -89,7 +81,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden fixed inset-0 bg-black/95 pt-20 px-4 z-40 flex flex-col justify-between h-full">
           <div className="flex flex-col space-y-8">
@@ -107,16 +98,22 @@ const Navbar = () => {
           
           <div className="flex justify-center space-x-6 py-10">
             {socialLinks.map((link, index) => (
-              <a 
+              <motion.a 
                 key={index}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="text-white hover:text-neobrutalism-purple transition-colors"
+                className="text-white"
+                whileHover={{ 
+                  scale: 1.2, 
+                  color: "#00FFFF",
+                  transition: { duration: 0.3 }
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 {link.icon}
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>

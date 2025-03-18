@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -24,16 +25,22 @@ const Footer: React.FC = () => {
           
           <div className="flex space-x-6">
             {socialLinks.map((link, index) => (
-              <a 
+              <motion.a 
                 key={index}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="text-white hover:text-neobrutalism-purple transition-colors"
+                whileHover={{ 
+                  scale: 1.2, 
+                  color: "#00FFFF",
+                  transition: { duration: 0.3 }
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="text-white"
               >
                 {link.icon}
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
