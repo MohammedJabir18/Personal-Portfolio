@@ -1,14 +1,16 @@
+
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import ParticleBackground from '../components/ParticleBackground';
-import ProjectCard from '../components/ProjectCard';
 import TimelineItem from '../components/TimelineItem';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import AvatarProfile from '../components/AvatarProfile';
 import LoadingScreen from '../components/LoadingScreen';
 import Skills3DGrid from '../components/Skills3DGrid';
-import { ChevronDown, Download, ExternalLink } from 'lucide-react';
+import ProjectCategories from '../components/ProjectCategories';
+import { ChevronDown, Download } from 'lucide-react';
+import { Project } from '../components/ProjectCategories';
 
 const Index: React.FC = () => {
   const [typedText, setTypedText] = useState('');
@@ -35,22 +37,25 @@ const Index: React.FC = () => {
     }
   }, [loading]);
   
-  // Project data
-  const projects = [
+  // Project data with categories
+  const projects: Project[] = [
+    // Latest/Featured Projects (will show in Latest tab)
     {
       title: 'Data Visualization Dashboard',
       description: 'Interactive dashboard for visualizing complex datasets with customizable filters and real-time updates.',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
       technologies: ['Python', 'React', 'D3.js', 'Flask'],
       githubLink: 'https://github.com/MohammedJabir18',
-      demoLink: '#'
+      demoLink: '#',
+      category: 'web'
     },
     {
       title: 'Machine Learning Classifier',
       description: 'A classification model for predicting customer behavior with feature engineering and model evaluation.',
       image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80',
       technologies: ['Python', 'scikit-learn', 'TensorFlow', 'Pandas'],
-      githubLink: 'https://github.com/MohammedJabir18'
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'data-science'
     },
     {
       title: 'Time Series Forecasting',
@@ -58,10 +63,131 @@ const Index: React.FC = () => {
       image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80',
       technologies: ['Python', 'TensorFlow', 'Prophet', 'Matplotlib'],
       githubLink: 'https://github.com/MohammedJabir18',
-      demoLink: '#'
+      demoLink: '#',
+      category: 'analytics'
+    },
+    // Additional projects to have 6 in the "Latest" tab
+    {
+      title: 'Natural Language Processing Tool',
+      description: 'Text analysis tool that processes and categorizes large volumes of text data using advanced NLP algorithms.',
+      image: 'https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'NLTK', 'spaCy', 'Transformers'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      demoLink: '#',
+      category: 'python'
+    },
+    {
+      title: 'Portfolio Website',
+      description: 'Modern, responsive portfolio website built with React and Tailwind CSS featuring 3D animations and interactions.',
+      image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80',
+      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      demoLink: '#',
+      category: 'web'
+    },
+    {
+      title: 'Recommender System',
+      description: 'Content-based and collaborative filtering recommender system for e-commerce product suggestions.',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'scikit-learn', 'Surprise', 'FastAPI'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'data-science'
+    },
+    
+    // Python Projects (some overlap with Latest)
+    {
+      title: 'Data Cleaning Utility',
+      description: 'Python utility for automated data cleaning, handling missing values, outliers, and standardization.',
+      image: 'https://images.unsplash.com/photo-1555952494-efd681c7e3f9?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'pandas', 'NumPy', 'Jupyter'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'python'
+    },
+    {
+      title: 'Web Scraper',
+      description: 'Robust web scraping tool that extracts and structures data from websites with rate limiting and proxy rotation.',
+      image: 'https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'BeautifulSoup', 'Scrapy', 'Selenium'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'python'
+    },
+    
+    // Web Development Projects (some overlap with Latest)
+    {
+      title: 'E-Commerce Platform',
+      description: 'Full-stack e-commerce platform with product catalog, user authentication, and payment processing.',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      demoLink: '#',
+      category: 'web'
+    },
+    {
+      title: 'Real-time Chat Application',
+      description: 'WebSocket-based chat application supporting private conversations, group chats, and file sharing.',
+      image: 'https://images.unsplash.com/photo-1611606063065-ee7946f0787a?auto=format&fit=crop&q=80',
+      technologies: ['React', 'Socket.io', 'Express', 'Firebase'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'web'
+    },
+    
+    // Analytics & Visualization Projects
+    {
+      title: 'Interactive Data Explorer',
+      description: 'Web-based interactive data exploration tool with customizable visualizations and statistical analysis.',
+      image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80',
+      technologies: ['D3.js', 'React', 'Python', 'Flask'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      demoLink: '#',
+      category: 'analytics'
+    },
+    {
+      title: 'COVID-19 Trend Visualizer',
+      description: 'Dashboard for visualizing COVID-19 data trends across countries with time-series analysis.',
+      image: 'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'Plotly', 'Dash', 'pandas'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      demoLink: '#',
+      category: 'analytics'
+    },
+    
+    // Data Science Projects
+    {
+      title: 'Customer Segmentation',
+      description: 'Machine learning model for customer segmentation using clustering techniques and demographic data.',
+      image: 'https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'scikit-learn', 'K-means', 'Matplotlib'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'data-science'
+    },
+    {
+      title: 'Predictive Maintenance',
+      description: 'Predictive maintenance system for industrial equipment using IoT sensor data and machine learning.',
+      image: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'TensorFlow', 'Time Series', 'IoT'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'data-science'
+    },
+    
+    // Experimental Projects
+    {
+      title: 'AR Data Visualization',
+      description: 'Experimental augmented reality application for visualizing complex data in 3D space.',
+      image: 'https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?auto=format&fit=crop&q=80',
+      technologies: ['Unity', 'ARKit', 'C#', '3D Visualization'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'experimental'
+    },
+    {
+      title: 'Blockchain Analytics',
+      description: 'Experimental tool for blockchain data analysis and transaction pattern visualization.',
+      image: 'https://images.unsplash.com/photo-1639762681057-408e52192e55?auto=format&fit=crop&q=80',
+      technologies: ['Python', 'Web3.py', 'Ethereum', 'D3.js'],
+      githubLink: 'https://github.com/MohammedJabir18',
+      category: 'experimental'
     }
   ];
-  
+
   // Skill data
   const programmingSkills = [
     { name: 'Python', value: 85, color: '#3A86FF' },
@@ -112,7 +238,7 @@ const Index: React.FC = () => {
       {loading ? (
         <LoadingScreen finishLoading={() => setLoading(false)} />
       ) : (
-        <div className={`min-h-screen bg-neobrutalism-dark text-white ${isLoaded ? 'animate-in' : 'opacity-0'}`}>
+        <div className={`min-h-screen bg-neobrutalism-dark text-white overflow-x-hidden ${isLoaded ? 'animate-in' : 'opacity-0'}`}>
           <Navbar />
           
           {/* Hero Section */}
@@ -206,31 +332,8 @@ const Index: React.FC = () => {
                 Each demonstrates different aspects of my technical skills and problem-solving approach.
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project, index) => (
-                  <ProjectCard 
-                    key={index}
-                    title={project.title}
-                    description={project.description}
-                    image={project.image}
-                    technologies={project.technologies}
-                    githubLink={project.githubLink}
-                    demoLink={project.demoLink}
-                  />
-                ))}
-              </div>
-              
-              <div className="text-center mt-12">
-                <a 
-                  href="https://github.com/MohammedJabir18"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="neo-button-outline inline-flex items-center gap-2"
-                >
-                  <span>View More on GitHub</span>
-                  <ExternalLink size={18} />
-                </a>
-              </div>
+              {/* New categorized projects component */}
+              <ProjectCategories projects={projects} />
             </div>
           </section>
           
