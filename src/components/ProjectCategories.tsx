@@ -1,11 +1,12 @@
-import React, { useState, useRef } from 'react';
+
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProjectCard from './ProjectCard';
 import { Skeleton } from './ui/skeleton';
+import { Progress } from './ui/progress';
 import { Code, Globe, BarChart3, Database, Beaker, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Define the project data structure
 export interface Project {
   title: string;
   description: string;
@@ -22,22 +23,106 @@ interface ProjectCategoriesProps {
 
 const ProjectCategories: React.FC<ProjectCategoriesProps> = ({ projects }) => {
   const [loading, setLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [activeTab, setActiveTab] = useState("latest");
-  const scrollContainerRef = useRef<HTMLDivElement>(null); // Reference for the scrollable container
+  const [animationComplete, setAnimationComplete] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
 
-  // Simulate loading delay
-React.useEffect(() => {
-  setLoading(true);
-  const timer = setTimeout(() => {
-    setLoading(false);
-  }, 100); // fast loading delay (100ms)
-  return () => clearTimeout(timer);
-}, [activeTab]);
+  const checkScrollPosition = () => {
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
+      
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
+    }
+  };
 
-  // Get the latest 6 projects for the "Latest Projects" tab
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      checkScrollPosition();
+      scrollContainer.addEventListener('scroll', checkScrollPosition);
+      return () => {
+        scrollContainer.removeEventListener('scroll', checkScrollPosition);
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', checkScrollPosition);
+    return () => {
+      window.removeEventListener('resize', checkScrollPosition);
+    };
+  }, []);
+
+  // Initial loading animation when component mounts
+  useEffect(() => {
+    // Start with loading animation on initial mount
+    if (initialLoad) {
+      setLoading(true);
+      setLoadingProgress(0);
+      setAnimationComplete(false);
+      
+      // Simulate incremental loading
+      const interval = setInterval(() => {
+        setLoadingProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 100);
+
+      // Complete loading after animation
+      const timer = setTimeout(() => {
+        setLoading(false);
+        setInitialLoad(false);
+      }, 1100);
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timer);
+      };
+    }
+  }, [initialLoad]);
+
+  // Reset loading state and animation status when tab changes
+  useEffect(() => {
+    if (!initialLoad) {
+      setLoading(true);
+      setLoadingProgress(0);
+      setAnimationComplete(false);
+      
+      // Simulate incremental loading
+      const interval = setInterval(() => {
+        setLoadingProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 100);
+
+      // Complete loading after animation
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 1100); // Slightly longer than the progress animation
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timer);
+      };
+    }
+  }, [activeTab, initialLoad]);
+
   const latestProjects = projects.slice(0, 6);
-  
-  // Filter projects based on active category
+
   const getFilteredProjects = () => {
     switch (activeTab) {
       case 'latest':
@@ -59,7 +144,6 @@ React.useEffect(() => {
 
   const filteredProjects = getFilteredProjects();
 
-  // Count projects in each category for badges
   const projectCounts = {
     latest: 6,
     python: projects.filter(p => p.category === 'python').length,
@@ -69,26 +153,31 @@ React.useEffect(() => {
     experimental: projects.filter(p => p.category === 'experimental').length
   };
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.05 }
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.1
+      }
     }
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, rotateY: 90 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      rotateY: 0,
-      transition: { duration: 0.4, ease: "easeOut" }
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" }
     },
-    exit: { opacity: 0, rotateY: -90, transition: { duration: 0.4, ease: "easeIn" } }
+    exit: { 
+      opacity: 0, 
+      y: -20, 
+      transition: { duration: 0.3, ease: "easeIn" } 
+    }
   };
 
-  // Scroll functions
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });
@@ -101,9 +190,13 @@ React.useEffect(() => {
     }
   };
 
+  // Handle animation completion
+  const handleAnimationComplete = () => {
+    setAnimationComplete(true);
+  };
+
   return (
     <div className="w-full relative">
-      {/* Decorative elements */}
       <div className="absolute -top-20 -left-20 w-40 h-40 bg-neobrutalism-purple/20 rounded-full blur-3xl opacity-50 animate-pulse-slow"></div>
       <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-neobrutalism-blue/20 rounded-full blur-3xl opacity-50 animate-pulse-slow"></div>
       
@@ -113,32 +206,36 @@ React.useEffect(() => {
         className="w-full"
       >
         <div className="relative mb-12 overflow-visible">
-          {/* Gradient line below tabs */}
           <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-neobrutalism-purple via-neobrutalism-blue to-neobrutalism-cyan"></div>
           
-          {/* Flex container with stylish buttons and tabs */}
           <div className="flex items-center justify-center gap-4">
-            {/* Left Button (Start of Categories) */}
-            <motion.button
-              aria-label="Scroll categories left"
-              className="hidden md:block p-2 rounded-full bg-neobrutalism-dark text-neobrutalism-cyan border border-neobrutalism-cyan/50"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95, x: 2, y: 2 }}
-              style={{ boxShadow: "4px 4px 0px 0px #000" }}
-              onClick={scrollLeft}
-            >
-              <motion.span
-                initial={{ x: 0 }}
-                whileHover={{ x: -3 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <ChevronLeft size={16} />
-              </motion.span>
-            </motion.button>
+            <AnimatePresence>
+              {canScrollLeft && (
+                <motion.button
+                  aria-label="Scroll categories left"
+                  className="hidden md:block p-2 rounded-full bg-neobrutalism-dark text-neobrutalism-cyan border border-neobrutalism-cyan/50"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95, x: 2, y: 2 }}
+                  style={{ boxShadow: "4px 4px 0px 0px #000" }}
+                  onClick={scrollLeft}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <motion.span
+                    initial={{ x: 0 }}
+                    whileHover={{ x: -3 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <ChevronLeft size={16} />
+                  </motion.span>
+                </motion.button>
+              )}
+            </AnimatePresence>
 
-            {/* TabsList with scrollable wrapper */}
             <div 
-              ref={scrollContainerRef} // Attach ref to the scrollable div
+              ref={scrollContainerRef}
               className="overflow-x-auto no-scrollbar pb-2"
             >
               <TabsList className="w-full flex justify-start md:justify-center bg-transparent gap-2 md:gap-4 min-w-max">
@@ -264,93 +361,130 @@ React.useEffect(() => {
               </TabsList>
             </div>
 
-            {/* Right Button (End of Categories) */}
-            <motion.button
-              aria-label="Scroll categories right"
-              className="hidden md:block p-2 rounded-full bg-neobrutalism-dark text-neobrutalism-cyan border border-neobrutalism-cyan/50"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95, x: 2, y: 2 }}
-              style={{ boxShadow: "4px 4px 0px 0px #000" }}
-              onClick={scrollRight}
-            >
-              <motion.span
-                initial={{ x: 0 }}
-                whileHover={{ x: 3 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <ChevronRight size={16} />
-              </motion.span>
-            </motion.button>
+            <AnimatePresence>
+              {canScrollRight && (
+                <motion.button
+                  aria-label="Scroll categories right"
+                  className="hidden md:block p-2 rounded-full bg-neobrutalism-dark text-neobrutalism-cyan border border-neobrutalism-cyan/50"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95, x: 2, y: 2 }}
+                  style={{ boxShadow: "4px 4px 0px 0px #000" }}
+                  onClick={scrollRight}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <motion.span
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 3 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <ChevronRight size={16} />
+                  </motion.span>
+                </motion.button>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 
-        {/* Tab content with animations */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, rotateY: 90 }}
-            animate={{ opacity: 1, rotateY: 0 }}
-            exit={{ opacity: 0, rotateY: -90 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="perspective-1000"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="perspective-1000 w-full"
           >
             {loading ? (
-              // Loading skeleton with 3D effect
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div className="space-y-8">
+                <motion.div 
+                  className="max-w-sm mx-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <p className="text-center text-neobrutalism-cyan mb-2 font-medium">Loading projects...</p>
+                  <Progress value={loadingProgress} className="h-2 bg-neobrutalism-dark/50" />
                   <motion.div 
-                    key={i} 
-                    className="neo-card h-[380px] overflow-hidden"
-                    initial={{ opacity: 0, y: 20, rotateX: 10 }}
-                    animate={{ 
-                      opacity: 1, 
-                      y: 0, 
-                      rotateX: 0,
-                      transition: { 
-                        delay: i * 0.1,
-                        duration: 0.5,
-                        type: "spring"
-                      }
+                    className="h-0.5 w-full mt-1 bg-gradient-to-r from-neobrutalism-purple via-neobrutalism-blue to-neobrutalism-cyan rounded-full opacity-70"
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3],
                     }}
-                  >
-                    <div className="h-48 w-full relative overflow-hidden">
-                      <Skeleton className="h-full w-full absolute inset-0" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent animate-shimmer"></div>
-                    </div>
-                    <div className="p-5">
-                      <Skeleton className="h-6 w-3/4 mb-2" />
-                      <Skeleton className="h-20 w-full mb-4" />
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {[1, 2, 3].map((j) => (
-                          <Skeleton key={j} className="h-6 w-16" />
-                        ))}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </motion.div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-8">
+                  {[1, 2, 3, 4, 5, 6].map((i) => (
+                    <motion.div 
+                      key={i} 
+                      className="neo-card h-[380px] overflow-hidden rounded-xl relative"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: 0,
+                        transition: { 
+                          delay: i * 0.1,
+                          duration: 0.5,
+                          type: "spring"
+                        }
+                      }}
+                    >
+                      <div className="h-48 w-full relative overflow-hidden">
+                        <Skeleton className="h-full w-full absolute inset-0" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent animate-shimmer"></div>
                       </div>
-                      <div className="flex gap-4">
-                        <Skeleton className="h-6 w-20" />
-                        <Skeleton className="h-6 w-20" />
+                      <div className="p-5 bg-neobrutalism-dark">
+                        <Skeleton className="h-6 w-3/4 mb-2" />
+                        <Skeleton className="h-20 w-full mb-4" />
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {[1, 2, 3].map((j) => (
+                            <Skeleton key={j} className="h-6 w-16" />
+                          ))}
+                        </div>
+                        <div className="flex gap-4">
+                          <Skeleton className="h-6 w-20" />
+                          <Skeleton className="h-6 w-20" />
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                      
+                      {/* Shimmer overlay */}
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+                        animate={{
+                          x: ['-100%', '200%'],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 1.5,
+                          ease: "linear"
+                        }}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             ) : (
               <motion.div 
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-8"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
+                onAnimationComplete={handleAnimationComplete}
               >
                 {filteredProjects.length > 0 ? (
-                  filteredProjects.map((project) => (
+                  filteredProjects.map((project, index) => (
                     <motion.div 
-                      key={project.title} 
+                      key={`${activeTab}-${project.title}`} 
                       variants={itemVariants} 
-                      className="perspective-1000 transform-gpu"
-                      whileHover={{ 
-                        z: 10, 
-                        scale: 1.02,
-                        transition: { duration: 0.2 }
-                      }}
+                      className="perspective-1000 h-full"
+                      custom={index}
                     >
                       <ProjectCard {...project} />
                     </motion.div>

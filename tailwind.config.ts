@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,7 +62,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Neo-brutalist custom colors
 				neobrutalism: {
 					dark: '#0A1128',
 					purple: '#9D4EDD',
@@ -129,8 +127,50 @@ export default {
 			boxShadow: {
 				'brutal': '5px 5px 0px 0px #000000',
 				'brutal-sm': '3px 3px 0px 0px #000000'
+			},
+			transformStyle: {
+				'preserve-3d': 'preserve-3d',
+				'flat': 'flat',
+			},
+			perspective: {
+				'none': 'none',
+				'500': '500px',
+				'1000': '1000px',
+				'2000': '2000px',
+			},
+			backfaceVisibility: {
+				'visible': 'visible',
+				'hidden': 'hidden',
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addUtilities }) {
+			const newUtilities = {
+				'.preserve-3d': {
+					transformStyle: 'preserve-3d',
+				},
+				'.perspective-500': {
+					perspective: '500px',
+				},
+				'.perspective-1000': {
+					perspective: '1000px',
+				},
+				'.perspective-2000': {
+					perspective: '2000px',
+				},
+				'.backface-visible': {
+					backfaceVisibility: 'visible',
+				},
+				'.backface-hidden': {
+					backfaceVisibility: 'hidden',
+				},
+				'.transform-gpu': {
+					transform: 'translateZ(0)',
+				}
+			}
+			addUtilities(newUtilities)
+		},
+	],
 } satisfies Config;
