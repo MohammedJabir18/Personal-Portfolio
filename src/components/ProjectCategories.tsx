@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -30,6 +29,21 @@ const ProjectCategories: React.FC<ProjectCategoriesProps> = ({ projects }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if viewport is mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
 
   const checkScrollPosition = () => {
     const scrollContainer = scrollContainerRef.current;
@@ -121,7 +135,12 @@ const ProjectCategories: React.FC<ProjectCategoriesProps> = ({ projects }) => {
     }
   }, [activeTab, initialLoad]);
 
-  const latestProjects = projects.slice(0, 6);
+  // Get only 4 projects for mobile view in Latest tab
+  const getLatestProjects = () => {
+    return isMobile ? projects.slice(0, 4) : projects.slice(0, 6);
+  };
+
+  const latestProjects = getLatestProjects();
 
   const getFilteredProjects = () => {
     switch (activeTab) {
@@ -145,7 +164,7 @@ const ProjectCategories: React.FC<ProjectCategoriesProps> = ({ projects }) => {
   const filteredProjects = getFilteredProjects();
 
   const projectCounts = {
-    latest: 6,
+    latest: isMobile ? 4 : 6,
     python: projects.filter(p => p.category === 'python').length,
     web: projects.filter(p => p.category === 'web').length,
     analytics: projects.filter(p => p.category === 'analytics').length,
