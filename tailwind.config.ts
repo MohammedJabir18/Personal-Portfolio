@@ -118,7 +118,8 @@ export default {
 				'typing': 'typing 3.5s steps(40, end)',
 				'blink': 'blink 0.75s step-end infinite',
 				'shimmer': 'shimmer 2s linear infinite',
-				'rotate-slow': 'rotate-slow 15s linear infinite'
+				'rotate-slow': 'rotate-slow 15s linear infinite',
+				// 'rotate-fast': 'rotate-slow 2s linear infinite'
 			},
 			fontFamily: {
 				display: ['"Space Grotesk"', 'sans-serif'],
