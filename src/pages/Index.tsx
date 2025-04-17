@@ -45,7 +45,7 @@ const Index: React.FC = () => {
     {
       title: 'Brewmoon Cafe',
       description: 'A modern cafe website featuring menu, gallery, and contact information, built with Next.js.',
-      image: '/Images/brewmoon.png', // <-- Replace with actual image path
+      image: '/Images/brewmoon.png',
       technologies: ['React', 'Next.js', 'TypeScript', 'Framer Motion'],
       githubLink: 'https://github.com/MohammedJabir18/brewmoon-cafe.git',
       demoLink: 'https://brewmoon-cafe.vercel.app',
