@@ -12,6 +12,7 @@ import ProjectCategories from '../components/ProjectCategories';
 import { ChevronDown, Download } from 'lucide-react';
 import { Project } from '../components/ProjectCategories';
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Index: React.FC = () => {
   const [typedText, setTypedText] = useState('');
