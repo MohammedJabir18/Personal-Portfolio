@@ -18,7 +18,7 @@ const Index: React.FC = () => {
   const fullText = 'Data Science Enthusiast & Developer';
   const [isLoaded, setIsLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     // Typing animation for hero section
     let i = 0;
@@ -29,7 +29,7 @@ const Index: React.FC = () => {
         setTimeout(typeText, 100);
       }
     };
-    
+
     if (!loading) {
       setTimeout(() => {
         setIsLoaded(true);
@@ -37,14 +37,14 @@ const Index: React.FC = () => {
       }, 500);
     }
   }, [loading]);
-  
+
   // Project data with categories
   const projects: Project[] = [
     // Latest/Featured Projects (will show in Latest tab)
     {
       title: 'Brewmoon Cafe',
       description: 'A modern cafe website featuring menu, gallery, and contact information, built with Next.js.',
-      image: '/Images/brewmoon.png',
+      image: '/Images/brewmoon.png', // <-- Replace with actual image path
       technologies: ['React', 'Next.js', 'TypeScript', 'Framer Motion'],
       githubLink: 'https://github.com/MohammedJabir18/brewmoon-cafe.git',
       demoLink: 'https://brewmoon-cafe.vercel.app',
@@ -94,7 +94,7 @@ const Index: React.FC = () => {
       githubLink: 'https://github.com/MohammedJabir18',
       category: 'data-science'
     },
-    
+
     // Python Projects (some overlap with Latest)
     {
       title: 'Data Cleaning Utility',
@@ -112,7 +112,7 @@ const Index: React.FC = () => {
       githubLink: 'https://github.com/MohammedJabir18',
       category: 'python'
     },
-    
+
     // Web Development Projects (some overlap with Latest)
     {
       title: 'E-Commerce Platform',
@@ -131,7 +131,7 @@ const Index: React.FC = () => {
       githubLink: 'https://github.com/MohammedJabir18',
       category: 'web'
     },
-    
+
     // Analytics & Visualization Projects
     {
       title: 'Interactive Data Explorer',
@@ -151,7 +151,7 @@ const Index: React.FC = () => {
       demoLink: '#',
       category: 'analytics'
     },
-    
+
     // Data Science Projects
     {
       title: 'Customer Segmentation',
@@ -169,7 +169,7 @@ const Index: React.FC = () => {
       githubLink: 'https://github.com/MohammedJabir18',
       category: 'data-science'
     },
-    
+
     // Experimental Projects
     {
       title: 'AR Data Visualization',
@@ -196,7 +196,7 @@ const Index: React.FC = () => {
     { name: 'SQL', value: 75, color: '#00FFFF' },
     { name: 'R', value: 60, color: '#FF8600' }
   ];
-  
+
   const dataSkills = [
     { name: 'pandas', value: 80, color: '#3A86FF' },
     { name: 'scikit-learn', value: 75, color: '#9D4EDD' },
@@ -204,14 +204,14 @@ const Index: React.FC = () => {
     { name: 'Tableau', value: 60, color: '#FF8600' },
     { name: 'PowerBI', value: 70, color: '#FB5607' }
   ];
-  
+
   const webSkills = [
     { name: 'HTML/CSS', value: 85, color: '#3A86FF' },
     { name: 'React', value: 70, color: '#9D4EDD' },
     { name: 'Node.js', value: 60, color: '#00FFFF' },
     { name: 'Flask', value: 65, color: '#FF8600' }
   ];
-  
+
   // Timeline data
   const timelineItems = [
     {
@@ -228,7 +228,7 @@ const Index: React.FC = () => {
     },
     {
       year: '2018 - 2021',
-      title: 'Bachelor\'s Degree',
+      title: "Bachelor's Degree",
       subtitle: 'Computer Science',
       description: 'Studied computer science with a focus on algorithms, data structures, and fundamentals of artificial intelligence.'
     }
@@ -241,7 +241,7 @@ const Index: React.FC = () => {
       ) : (
         <div className={`min-h-screen bg-neobrutalism-dark text-white overflow-x-hidden ${isLoaded ? 'animate-in' : 'opacity-0'}`}>
           <Navbar />
-          
+
           {/* Hero Section */}
           <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
             <ParticleBackground />
@@ -266,37 +266,37 @@ const Index: React.FC = () => {
               </a>
             </div>
           </section>
-          
+
           {/* About Section */}
           <section id="about" className="py-20">
             <div className="container mx-auto px-4">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
                 About <span className="text-gradient">Me</span>
               </h2>
-              
+
               <div className="grid grid-cols-1 gap-12 items-center">
                 <div className="flex flex-col items-center text-center">
                   {/* Avatar with animated border */}
-                  <AvatarProfile 
+                  <AvatarProfile
                     src="/lovable-uploads/c7d31be7-4be5-41eb-9718-89ddccf2e6db.png"
                     alt="Mohammed Jabir"
                     size="xl"
                   />
-                  
+
                   <h3 className="text-2xl font-bold mb-4">Mohammed Jabir</h3>
                   <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-                    I'm a self-taught data scientist passionate about uncovering insights from data. 
-                    With expertise in machine learning, data analysis, and visualization, I transform complex 
+                    I'm a self-taught data scientist passionate about uncovering insights from data.
+                    With expertise in machine learning, data analysis, and visualization, I transform complex
                     datasets into actionable intelligence that drives decision-making.
                   </p>
                   <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-                    My journey in data science began with a curiosity about patterns and predictions. 
-                    Through continuous learning and hands-on projects, I've developed skills in Python, 
+                    My journey in data science began with a curiosity about patterns and predictions.
+                    Through continuous learning and hands-on projects, I've developed skills in Python,
                     machine learning algorithms, and data visualization techniques.
                   </p>
-                  
-                  <a 
-                    href="#" 
+
+                  <a
+                    href="#"
                     className="neo-button inline-flex items-center gap-2"
                   >
                     <Download size={18} />
@@ -304,12 +304,12 @@ const Index: React.FC = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="mt-20">
                 <h3 className="text-2xl font-bold mb-8 text-center">My Journey</h3>
                 <div className="max-w-3xl mx-auto">
                   {timelineItems.map((item, index) => (
-                    <TimelineItem 
+                    <TimelineItem
                       key={index}
                       year={item.year}
                       title={item.title}
@@ -321,7 +321,7 @@ const Index: React.FC = () => {
               </div>
             </div>
           </section>
-          
+
           {/* Projects Section */}
           <section id="projects" className="py-20 bg-black/20 grid-bg">
             <div className="container mx-auto px-4">
@@ -329,15 +329,15 @@ const Index: React.FC = () => {
                 My <span className="text-gradient">Projects</span>
               </h2>
               <p className="text-white/80 text-center max-w-2xl mx-auto mb-12">
-                Here are some of my recent data science and development projects. 
+                Here are some of my recent data science and development projects.
                 Each demonstrates different aspects of my technical skills and problem-solving approach.
               </p>
-              
+
               {/* New categorized projects component */}
               <ProjectCategories projects={projects} />
             </div>
           </section>
-          
+
           {/* Skills Section */}
           <section id="skills" className="py-20">
             <div className="container mx-auto px-4">
@@ -347,24 +347,24 @@ const Index: React.FC = () => {
               <p className="text-white/80 text-center max-w-2xl mx-auto mb-12">
                 I've developed expertise across various technologies and domains, with a focus on data science and software development.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Skills3DGrid 
-                  title="Programming Languages" 
-                  skills={programmingSkills} 
+                <Skills3DGrid
+                  title="Programming Languages"
+                  skills={programmingSkills}
                 />
-                <Skills3DGrid 
-                  title="Data Science & ML" 
-                  skills={dataSkills} 
+                <Skills3DGrid
+                  title="Data Science & ML"
+                  skills={dataSkills}
                 />
-                <Skills3DGrid 
-                  title="Web Development" 
-                  skills={webSkills} 
+                <Skills3DGrid
+                  title="Web Development"
+                  skills={webSkills}
                 />
               </div>
             </div>
           </section>
-          
+
           {/* Contact Section */}
           <section id="contact" className="py-20 bg-black/20 grid-bg">
             <div className="container mx-auto px-4">
@@ -374,11 +374,11 @@ const Index: React.FC = () => {
               <p className="text-white/80 text-center max-w-2xl mx-auto mb-12">
                 Have a project in mind or want to discuss a collaboration? Feel free to reach out!
               </p>
-              
+
               <ContactForm />
             </div>
           </section>
-          
+
           <Footer />
         </div>
       )}
