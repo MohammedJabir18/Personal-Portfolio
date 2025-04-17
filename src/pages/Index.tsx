@@ -11,6 +11,7 @@ import Skills3DGrid from '../components/Skills3DGrid';
 import ProjectCategories from '../components/ProjectCategories';
 import { ChevronDown, Download } from 'lucide-react';
 import { Project } from '../components/ProjectCategories';
+import { Analytics } from "@vercel/analytics/react"
 
 const Index: React.FC = () => {
   const [typedText, setTypedText] = useState('');
@@ -41,12 +42,12 @@ const Index: React.FC = () => {
   const projects: Project[] = [
     // Latest/Featured Projects (will show in Latest tab)
     {
-      title: 'Data Visualization Dashboard',
-      description: 'Interactive dashboard for visualizing complex datasets with customizable filters and real-time updates.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
-      technologies: ['Python', 'React', 'D3.js', 'Flask'],
-      githubLink: 'https://github.com/MohammedJabir18',
-      demoLink: '#',
+      title: 'Brewmoon Cafe',
+      description: 'A modern cafe website featuring menu, gallery, and contact information, built with Next.js.',
+      image: '/Images/brewmoon.png',
+      technologies: ['React', 'Next.js', 'TypeScript', 'Framer Motion'],
+      githubLink: 'https://github.com/MohammedJabir18/brewmoon-cafe.git',
+      demoLink: 'https://brewmoon-cafe.vercel.app',
       category: 'web'
     },
     {
