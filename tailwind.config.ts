@@ -63,7 +63,7 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				neobrutalism: {
-					dark: '#0A1128',
+					dark: '#10131c',
 					purple: '#9D4EDD',
 					blue: '#3A86FF',
 					cyan: '#00FFFF',
