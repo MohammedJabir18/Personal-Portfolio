@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
@@ -8,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeLink, setActiveLink] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +16,37 @@ const Navbar = () => {
         setScrolled(true);
       } else {
         setScrolled(false);
+      }
+
+      // Update active link based on scroll position
+      const sections = ['about', 'projects', 'skills', 'contact'];
+      const windowHeight = window.innerHeight;
+      const scrollPosition = window.scrollY + 100; // Offset for navbar height
+
+      // Check if we're at the very top of the page
+      if (scrollPosition < 100) {
+        setActiveLink('home');
+        return;
+      }
+
+      // Check other sections
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const elementTop = rect.top + window.scrollY;
+          const elementBottom = elementTop + rect.height;
+
+          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+            setActiveLink(section);
+            return;
+          }
+        }
+      }
+
+      // If no section is active and we're not at the top, clear the active link
+      if (scrollPosition >= 100) {
+        setActiveLink('');
       }
     };
 
@@ -26,11 +57,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { title: 'Home', path: '/' },
-    { title: 'About', path: '/#about' },
-    { title: 'Projects', path: '/#projects' },
-    { title: 'Skills', path: '/#skills' },
-    { title: 'Contact', path: '/#contact' },
+    { title: 'Home', path: '/#home', id: 'home' },
+    { title: 'About', path: '/#about', id: 'about' },
+    { title: 'Projects', path: '/#projects', id: 'projects' },
+    { title: 'Skills', path: '/#skills', id: 'skills' },
+    { title: 'Contact', path: '/#contact', id: 'contact' },
   ];
 
   const socialLinks = [
@@ -88,29 +119,53 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/70 backdrop-blur-md py-2' : 'bg-transparent py-4'}`}>
+    <motion.nav 
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-black/20 backdrop-blur-md py-3 shadow-lg shadow-black/10 border-b border-white/10' 
+          : 'bg-transparent py-4'
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-3 group">
-            <Avatar className="h-10 w-10">
-              <AvatarImage src="/lovable-uploads/c7d31be7-4be5-41eb-9718-89ddccf2e6db.png" alt="Mohammed Jabir" className="object-contain" />
-              <AvatarFallback className="bg-neobrutalism-dark text-neobrutalism-purple">MJ</AvatarFallback>
-            </Avatar>
-            <span className="text-xl font-bold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-neobrutalism-purple after:via-neobrutalism-blue after:to-neobrutalism-cyan after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <Avatar className="h-10 w-10 transition-transform duration-300 group-hover:scale-110">
+                <AvatarImage src="/lovable-uploads/c7d31be7-4be5-41eb-9718-89ddccf2e6db.png" alt="Mohammed Jabir" className="object-contain" />
+                <AvatarFallback className="bg-neobrutalism-dark text-neobrutalism-purple">MJ</AvatarFallback>
+              </Avatar>
+            </motion.div>
+            <motion.span 
+              className="text-xl font-bold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-neobrutalism-purple after:via-neobrutalism-blue after:to-neobrutalism-cyan after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               Mohammed Jabir
-            </span>
+            </motion.span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-6">
               {navLinks.map((link) => (
-                <a 
+                <motion.a 
                   key={link.title} 
                   href={link.path} 
-                  className="relative neo-underline text-white hover:text-neobrutalism-cyan transition-colors"
+                  className={`relative text-white/80 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-neobrutalism-purple after:via-neobrutalism-blue after:to-neobrutalism-cyan after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+                    activeLink === link.id ? 'text-white after:scale-x-100' : ''
+                  }`}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   {link.title}
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -119,7 +174,6 @@ const Navbar = () => {
             <motion.button 
               onClick={() => setIsOpen(!isOpen)}
               className="text-white hover:text-neobrutalism-purple transition-colors p-2 z-50 relative"
-              aria-label={isOpen ? "Close Menu" : "Open Menu"}
               whileTap={{ scale: 0.9 }}
               whileHover={{ scale: 1.1 }}
             >
@@ -154,11 +208,12 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            className="md:hidden fixed inset-0 bg-black/95 pt-20 px-4 z-40 flex flex-col justify-between h-full"
+            className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-md pt-20 px-4 z-40 flex flex-col justify-between h-full overflow-hidden"
             variants={menuVariants}
             initial="closed"
             animate="open"
             exit="closed"
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
           >
             <div className="flex flex-col space-y-8">
               {navLinks.map((link) => (
@@ -166,7 +221,9 @@ const Navbar = () => {
                   key={link.title} 
                   href={link.path} 
                   onClick={() => setIsOpen(false)}
-                  className="text-2xl font-bold text-white hover:text-neobrutalism-purple transition-colors transform"
+                  className={`text-2xl font-bold text-white hover:text-neobrutalism-purple transition-colors transform ${
+                    activeLink === link.id ? 'text-neobrutalism-purple' : ''
+                  }`}
                   variants={itemVariants}
                   whileHover={{ x: 10, color: "#9D4EDD" }}
                   whileTap={{ scale: 0.98 }}
@@ -211,7 +268,6 @@ const Navbar = () => {
               ))}
             </motion.div>
 
-            {/* Close button with floating animation at the bottom */}
             <motion.button
               onClick={() => setIsOpen(false)}
               className="absolute bottom-28 right-6 bg-neobrutalism-purple text-white p-3 rounded-full shadow-brutal-sm"
@@ -244,7 +300,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 

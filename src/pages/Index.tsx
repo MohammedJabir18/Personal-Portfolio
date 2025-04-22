@@ -11,8 +11,6 @@ import Skills3DGrid from '../components/Skills3DGrid';
 import ProjectCategories from '../components/ProjectCategories';
 import { ChevronDown, Download } from 'lucide-react';
 import { Project } from '../components/ProjectCategories';
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Index: React.FC = () => {
   const [typedText, setTypedText] = useState('');
@@ -34,6 +32,24 @@ const Index: React.FC = () => {
     if (!loading) {
       setTimeout(() => {
         setIsLoaded(true);
+
+        const savedScrollPos = localStorage.getItem('scrollPos');
+        if (savedScrollPos) {
+          const scrollPos = Number(savedScrollPos);
+          // Use requestAnimationFrame to ensure scrolling happens after layout
+          window.requestAnimationFrame(() => {
+            window.scrollTo(0, scrollPos);
+            localStorage.removeItem('scrollPos');
+          });
+        }
+
+        const saveScrollPosition = () => {
+          localStorage.setItem('scrollPos', window.scrollY.toString());
+        };
+
+        window.addEventListener('beforeunload', saveScrollPosition);
+
+
         setTimeout(typeText, 1000);
       }, 500);
     }
