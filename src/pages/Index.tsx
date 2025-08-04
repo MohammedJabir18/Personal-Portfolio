@@ -59,6 +59,15 @@ const Index: React.FC = () => {
   const projects: Project[] = [
     // Latest/Featured Projects (will show in Latest tab)
     {
+      title: 'Milestone Trading Academy',
+      description: 'A modern, responsive educational website designed for trading education and financial learning.',
+      image: '/Images/Milestone.png',
+      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
+      githubLink: 'https://github.com/MohammedJabir18/milestone-trading-academy',
+      demoLink: 'https://milestone-trading-academy.vercel.app/',
+      category: 'web'
+    },
+    {
       title: 'Brewmoon Cafe',
       description: 'A modern cafe website featuring menu, gallery, and contact information, built with Next.js.',
       image: '/Images/brewmoon.png',
@@ -131,15 +140,6 @@ const Index: React.FC = () => {
     },
 
     // Web Development Projects (some overlap with Latest)
-    {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce platform with product catalog, user authentication, and payment processing.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      githubLink: 'https://github.com/MohammedJabir18',
-      demoLink: '#',
-      category: 'web'
-    },
     {
       title: 'Real-time Chat Application',
       description: 'WebSocket-based chat application supporting private conversations, group chats, and file sharing.',
