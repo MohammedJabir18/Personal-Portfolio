@@ -1,138 +1,98 @@
-# 🚀 Mohammed Jabir's Portfolio Website
-
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=0969DA&center=true&vCenter=true&width=435&lines=Self-taught+Data+Scientist;Frontend+Developer;Problem+Solver;Continuous+Learner" alt="Typing SVG" />
-</p>
 
 <div align="center">
 
-<img width="500px" src="https://github.com/MohammedJabir18/Personal-Portfolio/blob/main/assets/DataScientist.png">
+# ⚡ Mohammed Jabir | AI & Automation Specialist
 
-[![Vercel Status](https://img.shields.io/badge/Vercel-Live-brightgreen?style=for-the-badge&logo=vercel)](http://jabir-portfolio.vercel.app)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/MohammedJabir18/Personal-Portfolio.git)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mohammedjabir.me)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
+
+<br />
+
+> *"Building intelligent systems, automating the future, and crafting digital experiences that matter."*
+
+<br />
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohammed--jabir)
+[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MohammedJabir18)
+[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/mohammedjabir__)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/mohammedjabir__/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jabirahmedz111@gmail.com)
 
 </div>
 
-## ✨ About This Project
+---
 
-This portfolio website showcases my journey as a self-taught data scientist and developer. It's designed to highlight my skills, projects, and professional experiences through a clean, modern, and interactive interface.
+## 🚀 About The Project
 
-<div align="center">
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmU3NGMzMjlmZWM1NGEzMzM3MmI2MjIzOTU2NDQ4MzA5OTRkNzRmMSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PXM/JIX9t2j0ZTN9S/giphy.gif" width="300" alt="Coding GIF" />
-</div>
+Welcome to my personal portfolio—a digital playground where design meets intelligence. This project is built to demonstrate what's possible when you combine **Next.js 14** performance with **Awwwards-tier** aesthetics.
+
+### Key Features
+
+*   🌌 **Immersive Hero Section**: Featuring a custom particle system and a smooth, letter-by-letter gradient reveal animation.
+*   🏎️ **High-Performance Animations**: Powered by **Framer Motion**, ensuring butter-smooth 60fps transitions and scroll-linked effects.
+*   🧩 **Bento Grid Layout**: A modern, structured way to showcase skills and experience, featuring "Spotlight Cards" that glow on hover.
+*   🎨 **Digital Synapse Design**: A custom design system built on **Tailwind CSS**, featuring glassmorphism, neon glows, and a "Noir" dark mode aesthetic.
+*   📜 **Scroll-Linked Storytelling**: The Projects section features a sticky horizontal scroll that guides users through my work.
+
+---
 
 ## 🛠️ Tech Stack
 
-<div align="center">
+This project is built using the latest and greatest in the React ecosystem:
 
-| Technology | Description |
-|------------|-------------|
-| ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) | Next-generation frontend tooling |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) | Strongly typed programming language |
-| ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) | JavaScript library for building user interfaces |
-| ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white) | Re-usable UI components |
-| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white) | Utility-first CSS framework |
-| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) | Platform for deploying web projects |
+| Core | Styling & Motion | Types |
+| :--- | :--- | :--- |
+| ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white) | ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) |
+| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white) | ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) |
 
-</div>
+---
 
-## 🌟 Features
+## 📦 Getting Started
 
-- ⚡️ **Lightning Fast**: Built with Vite for optimal performance
-- 🎨 **Modern Design**: Clean UI with shadcn/ui components and Tailwind CSS
-- 🔒 **Type Safety**: Enhanced with TypeScript for better code quality
-- 📱 **Responsive**: Fully responsive across all devices
-- 🔄 **Interactive**: Smooth animations and transitions
-- 🌙 **Dark Mode**: Toggle between light and dark themes
+Want to run this locally? Here's how to get up and speed:
 
-## 📹 Preview
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/MohammedJabir18/Personal-Portfolio.git
+    cd Personal-Portfolio
+    ```
 
-<div align="center">
-  <img src="https://github.com/MohammedJabir18/Personal-Portfolio/blob/main/assets/PortfolioWebsite.gif" alt="Portfolio Preview" width="800" />
-</div>
+2.  **Install dependencies**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-## 🚀 Getting Started
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
 
-### Prerequisites
+4.  **Open your browser**
+    Navigate to [http://localhost:3000](http://localhost:3000) to see the magic happen.
 
-- Node.js (v16.0.0 or higher)
-- npm or yarn
+---
 
-### Installation
+## ☕ Support My Work
 
-```bash
-# Clone the repository
-git clone https://github.com/MohammedJabir18/Personal-Portfolio.git
-
-# Navigate to the project directory
-cd Personal-Portfolio
-
-# Install dependencies
-npm install
-# or
-yarn install
-
-# Start the development server
-npm run dev
-# or
-yarn dev
-```
-
-## 🏗️ Project Structure
-
-```
-Personal-Portfolio/
-├── public/                # Static assets
-├── src/
-│   ├── assets/            # Images and other assets
-│   ├── components/        # Reusable UI components
-│   ├── data/              # Data files for projects and content
-│   ├── hooks/             # Custom React hooks
-│   ├── layouts/           # Layout components
-│   ├── pages/             # Page components
-│   ├── styles/            # Global styles and Tailwind config
-│   ├── types/             # TypeScript type definitions
-│   ├── utils/             # Utility functions
-│   ├── App.tsx            # Main App component
-│   └── main.tsx           # Entry point
-├── .gitignore
-├── package.json
-├── README.md
-├── tailwind.config.js
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 🌐 Deployment
-
-This project is deployed on Vercel. Any changes pushed to the main branch will automatically trigger a new deployment.
-
-Visit the live site: [http://jabir-portfolio.vercel.app](http://jabir-portfolio.vercel.app)
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/MohammedJabir18/Personal-Portfolio/issues).
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📧 Contact
+If you find my work inspiring or useful, consider buying me a coffee to keep the code flowing!
 
 <div align="center">
-  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohammed--jabir)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MohammedJabir18)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jabirahmedz111@gmail.com)
-  
+<a href="https://buymeacoffee.com/mohammedjabir">
+  <img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee" height="50" />
+</a>
 </div>
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
 
 <div align="center">
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTRmMjM1YzI3YmEzMDhkOWQ3NGFkYmJlOTU1ODcyZDFiNTRkOTA3NyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100" alt="Developer GIF" />
+  <p>Designed & Developed with ❤️ by <strong>Mohammed Jabir</strong></p>
+  <p>© 2026 All Rights Reserved</p>
 </div>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=MohammedJabir18&style=flat-square&color=blue" alt="Profile Views" />
-</p>
-
-<p align="center">⭐ If you found this portfolio helpful, please consider giving it a star! ⭐</p>
