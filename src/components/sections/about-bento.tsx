@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import SpotlightCard from "@/components/ui/spotlight-card";
 import AnimatedCounter from "@/components/ui/animated-counter";
@@ -49,7 +50,7 @@ const letterVariants = {
 
 function BioCard() {
     return (
-        <SpotlightCard className="md:col-span-2 md:row-span-2">
+        <SpotlightCard className="md:col-span-2 md:row-span-2 group">
             <div className="p-8 h-full flex flex-col justify-between">
                 <div>
                     <motion.div
@@ -92,12 +93,17 @@ function BioCard() {
                 </div>
 
                 <div className="mt-8 flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-neon flex items-center justify-center text-white font-clash font-bold text-lg">
-                        J
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-neon-blue/20 group-hover:border-neon-blue transition-colors duration-500 shadow-lg shadow-neon-blue/5">
+                        <Image
+                            src="/images/my_photo.png"
+                            alt="Mohammed Jabir M"
+                            fill
+                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-110 group-hover:scale-100"
+                        />
                     </div>
                     <div>
-                        <p className="text-white font-clash font-semibold">Mohammed Jabir M</p>
-                        <p className="text-noir-muted text-xs font-geist">Full-Stack Developer</p>
+                        <p className="text-white font-clash font-semibold text-lg">Mohammed Jabir M</p>
+                        <p className="text-noir-muted text-xs font-geist tracking-wide">AI & Automation Architect</p>
                     </div>
                 </div>
             </div>

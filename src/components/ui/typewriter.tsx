@@ -9,6 +9,8 @@ interface TypewriterProps {
     typingSpeed?: number;
     deletingSpeed?: number;
     pauseDuration?: number;
+    loop?: boolean;
+    cursor?: string;
 }
 
 export default function Typewriter({
@@ -17,6 +19,8 @@ export default function Typewriter({
     typingSpeed = 80,
     deletingSpeed = 40,
     pauseDuration = 2000,
+    loop = true,
+    cursor = "|",
 }: TypewriterProps) {
     const [currentStringIndex, setCurrentStringIndex] = useState(0);
     const [currentText, setCurrentText] = useState("");
@@ -52,7 +56,7 @@ export default function Typewriter({
     return (
         <span className={cn("font-geist", className)}>
             {currentText}
-            <span className="animate-cursor-blink text-neon-blue">|</span>
+            <span className="animate-cursor-blink text-neon-blue">{cursor}</span>
         </span>
     );
 }

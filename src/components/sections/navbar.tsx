@@ -12,6 +12,33 @@ const NAV_LINKS = [
     { label: "Contact", href: "#contact" },
 ];
 
+function NavbarLogo() {
+    return (
+        <MagneticButton
+            className="group relative flex items-center gap-3 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 backdrop-blur-md overflow-hidden"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+            {/* Avatar */}
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-neon-blue/50 group-hover:border-neon-blue transition-colors duration-300 flex-shrink-0">
+                <img src="/images/My_photo2.png" alt="Mohammed Jabir" className="w-full h-full object-cover" />
+            </div>
+
+            {/* Text Reveal */}
+            <div className="flex flex-col items-start overflow-hidden w-0 group-hover:w-auto transition-all duration-500 ease-out">
+                <span className="text-white font-clash font-bold text-sm tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                    MOHAMMED JABIR
+                </span>
+                <span className="text-[8px] text-neon-blue font-geist tracking-[0.2em] uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                    System Online
+                </span>
+            </div>
+
+            {/* Scan Line Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+        </MagneticButton>
+    );
+}
+
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
@@ -46,12 +73,7 @@ export default function Navbar() {
             >
                 <div className="section-container flex items-center justify-between h-20">
                     {/* Logo */}
-                    <MagneticButton
-                        className="text-white font-clash font-bold text-xl tracking-tight !px-0 !py-0"
-                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                    >
-                        <span className="text-gradient">JM</span>
-                    </MagneticButton>
+                    <NavbarLogo />
 
                     {/* Desktop Links */}
                     <div className="hidden md:flex items-center gap-2">

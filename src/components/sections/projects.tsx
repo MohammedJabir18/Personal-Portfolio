@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
@@ -13,6 +13,8 @@ const PROJECTS = [
         tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
         color: "#3b82f6",
         gradient: "from-blue-600/20 to-purple-600/20",
+        image: "/images/BitBond_hero.png",
+        video: "/videos/Bitbond_website.mp4",
     },
     {
         title: "Vault79",
@@ -22,6 +24,8 @@ const PROJECTS = [
         tags: ["React", "Node.js", "MongoDB", "Figma"],
         color: "#8b5cf6",
         gradient: "from-purple-600/20 to-pink-600/20",
+        image: "/images/Vault79_hero.png",
+        video: "/videos/Vault79_website.mp4",
     },
     {
         title: "AI Automation Suite",
@@ -31,6 +35,8 @@ const PROJECTS = [
         tags: ["n8n", "Pinecone", "OpenAI", "Python", "RAG"],
         color: "#3b82f6",
         gradient: "from-cyan-600/20 to-blue-600/20",
+        image: null,
+        video: null,
     },
 ];
 
@@ -43,22 +49,36 @@ function ProjectCard({
 }) {
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const cardRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!cardRef.current) return;
         const rect = cardRef.current.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        setTilt({ x: y * -10, y: x * 10 });
+        setTilt({ x: y * -5, y: x * 5 }); // Reduced tilt for better media viewing
     };
 
-    const handleMouseLeave = () => setTilt({ x: 0, y: 0 });
+    const handleMouseEnter = () => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(() => { });
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setTilt({ x: 0, y: 0 });
+        if (videoRef.current) {
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+        }
+    };
 
     return (
         <motion.div
             ref={cardRef}
-            className="flex-shrink-0 w-[85vw] md:w-[600px] lg:w-[700px] group"
+            className="flex-shrink-0 w-full md:w-[600px] lg:w-[700px] group"
             onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{ perspective: "1000px" }}
             data-cursor="pointer"
@@ -69,66 +89,85 @@ function ProjectCard({
                     rotateY: tilt.y,
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className={`relative h-[400px] md:h-[450px] rounded-3xl overflow-hidden border border-noir-border bg-gradient-to-br ${project.gradient} bg-noir-card`}
+                className={`relative h-[400px] md:h-[450px] rounded-3xl overflow-hidden border border-noir-border bg-noir-card`}
             >
-                {/* Project Number */}
-                <div className="absolute top-6 left-8 text-8xl font-clash font-bold text-white/5">
+                {/* 1. Background Media Layer */}
+                <div className="absolute inset-0 z-0">
+                    {/* Fallback Gradient or Image */}
+                    {project.image ? (
+                        // Using standard img for simplicity/control with object-cover, or Next Image if preferred. 
+                        // absolute inset-0 w-full h-full object-cover
+                        <img
+                            src={project.image}
+                            alt={project.title}
+                            className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-0 transition-opacity duration-500"
+                        />
+                    ) : (
+                        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`} />
+                    )}
+
+                    {/* Video Overlay */}
+                    {project.video && (
+                        <video
+                            ref={videoRef}
+                            src={project.video}
+                            muted
+                            loop
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        />
+                    )}
+
+                    {/* Dark Gradient Overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
+                </div>
+
+                {/* Project Number - Moved/Styled */}
+                <div className="absolute top-6 right-8 text-8xl font-clash font-bold text-white/5 z-10">
                     0{index + 1}
                 </div>
 
-                {/* Glow Effect */}
-                <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                    style={{
-                        background: `radial-gradient(circle at 50% 50%, ${project.color}15, transparent 70%)`,
-                    }}
-                />
-
                 {/* Content */}
-                <div className="relative z-10 p-8 h-full flex flex-col justify-end">
-                    {/* Tags - fade in on hover */}
+                <div className="relative z-20 p-8 h-full flex flex-col justify-end">
+                    {/* Tags */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileHover={{ opacity: 1, y: 0 }}
-                        className="flex flex-wrap gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="flex flex-wrap gap-2 mb-4"
                     >
                         {project.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="px-3 py-1 rounded-full text-xs font-geist border border-white/10 bg-white/5 text-white/80"
+                                className="px-3 py-1 rounded-full text-xs font-geist border border-white/20 bg-black/50 backdrop-blur-md text-white/90"
                             >
                                 {tag}
                             </span>
                         ))}
                     </motion.div>
 
-                    <p className="text-xs font-geist text-noir-muted tracking-widest uppercase mb-2">
+                    <p className="text-xs font-geist text-neon-blue tracking-widest uppercase mb-2">
                         {project.subtitle}
                     </p>
-                    <h3 className="text-3xl md:text-4xl font-clash font-bold text-white mb-3">
+                    <h3 className="text-3xl md:text-5xl font-clash font-bold text-white mb-3">
                         {project.title}
                     </h3>
-                    <p className="text-sm text-noir-text/70 font-geist max-w-md leading-relaxed">
+                    <p className="text-sm text-white/70 font-geist max-w-md leading-relaxed mb-4">
                         {project.description}
                     </p>
 
                     {/* Links */}
-                    <div className="flex items-center gap-4 mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button className="flex items-center gap-2 text-xs font-geist text-neon-blue hover:text-white transition-colors">
+                    <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        <button className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full text-xs font-bold uppercase tracking-wider hover:bg-neon-blue hover:text-white transition-all">
                             <ExternalLink className="w-3 h-3" />
-                            View Project
-                        </button>
-                        <button className="flex items-center gap-2 text-xs font-geist text-noir-muted hover:text-white transition-colors">
-                            <Github className="w-3 h-3" />
-                            Source
+                            View Case Study
                         </button>
                     </div>
                 </div>
 
-                {/* Bottom gradient line */}
+                {/* Bottom Line */}
                 <div
-                    className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, ${project.color}, transparent)` }}
+                    className="absolute bottom-0 left-0 right-0 h-1 z-30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                    style={{ background: project.color }}
                 />
             </motion.div>
         </motion.div>
@@ -137,6 +176,15 @@ function ProjectCard({
 
 export default function Projects() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        const checkDesktop = () => setIsDesktop(window.innerWidth >= 768);
+        checkDesktop();
+        window.addEventListener("resize", checkDesktop);
+        return () => window.removeEventListener("resize", checkDesktop);
+    }, []);
+
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
@@ -145,9 +193,13 @@ export default function Projects() {
     const x = useTransform(scrollYProgress, [0, 1], ["2%", "-65%"]);
 
     return (
-        <section id="work" className="relative" ref={containerRef} style={{ height: "250vh" }}>
-            <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
-                <div className="section-container mb-16">
+        <section
+            id="work"
+            className="relative md:h-[250vh]"
+            ref={containerRef}
+        >
+            <div className="md:sticky md:top-0 md:h-screen md:overflow-hidden flex flex-col justify-center py-20 md:py-0">
+                <div className="section-container mb-12 md:mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -163,8 +215,11 @@ export default function Projects() {
                     </motion.div>
                 </div>
 
-                {/* Horizontal Scroll Gallery */}
-                <motion.div style={{ x }} className="flex gap-8 pl-[5vw]">
+                {/* Projects Container */}
+                <motion.div
+                    style={{ x: isDesktop ? x : 0 }}
+                    className="flex flex-col md:flex-row gap-8 px-[5vw] md:pl-[5vw]"
+                >
                     {PROJECTS.map((project, i) => (
                         <ProjectCard key={project.title} project={project} index={i} />
                     ))}
