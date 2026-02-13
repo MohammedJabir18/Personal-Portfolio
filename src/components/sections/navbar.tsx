@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "@/components/ui/magnetic-button";
 import { Menu, X } from "lucide-react";
@@ -20,7 +21,7 @@ function NavbarLogo() {
         >
             {/* Avatar */}
             <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-neon-blue/50 group-hover:border-neon-blue transition-colors duration-300 flex-shrink-0">
-                <img src="/images/My_photo2.png" alt="Mohammed Jabir" className="w-full h-full object-cover" />
+                <Image src="/images/My_photo2.png" alt="Mohammed Jabir" width={32} height={32} className="w-full h-full object-cover" />
             </div>
 
             {/* Text Reveal */}

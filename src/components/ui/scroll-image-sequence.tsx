@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 interface ScrollImageSequenceProps {
@@ -13,8 +13,8 @@ export default function ScrollImageSequence({
     containerRef,
 }: ScrollImageSequenceProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [loadedImages, setLoadedImages] = useState<HTMLImageElement[]>([]);
-    const [loading, setLoading] = useState(true);
+    const loadedImagesRef = useRef<(HTMLImageElement | null)[]>(new Array(images.length).fill(null));
+    const [ready, setReady] = useState(false);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -27,35 +27,51 @@ export default function ScrollImageSequence({
         [0, images.length - 1]
     );
 
+    // Progressive image loading — first frame loads immediately, rest in batches
     useEffect(() => {
-        const loadImages = async () => {
-            setLoading(true);
-            const promises = images.map((src) => {
-                return new Promise<HTMLImageElement>((resolve, reject) => {
-                    const img = new Image();
-                    img.src = src;
-                    img.onload = () => resolve(img);
-                    img.onerror = reject;
-                });
-            });
+        let cancelled = false;
+        const loaded = loadedImagesRef.current;
 
-            try {
-                const loaded = await Promise.all(promises);
-                setLoadedImages(loaded);
-                setLoading(false);
-            } catch (error) {
-                console.error("Failed to load images", error);
-                setLoading(false);
-            }
+        const loadImage = (index: number): Promise<void> => {
+            return new Promise((resolve) => {
+                if (loaded[index]) { resolve(); return; }
+                const img = new Image();
+                img.src = images[index];
+                img.onload = () => {
+                    if (!cancelled) loaded[index] = img;
+                    resolve();
+                };
+                img.onerror = () => resolve();
+            });
         };
 
-        loadImages();
+        // Load first frame immediately for instant render
+        loadImage(0).then(() => {
+            if (cancelled) return;
+            setReady(true);
+        });
+
+        // Then load rest in parallel batches of 10
+        const loadRest = async () => {
+            const BATCH_SIZE = 10;
+            for (let i = 1; i < images.length; i += BATCH_SIZE) {
+                if (cancelled) return;
+                const batch = Array.from(
+                    { length: Math.min(BATCH_SIZE, images.length - i) },
+                    (_, j) => loadImage(i + j)
+                );
+                await Promise.all(batch);
+            }
+        };
+        loadRest();
+
+        return () => { cancelled = true; };
     }, [images]);
 
-    const render = (index: number) => {
+    const render = useCallback((index: number) => {
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext("2d");
-        const img = loadedImages[index];
+        const img = loadedImagesRef.current[index];
 
         if (!canvas || !ctx || !img) return;
 
@@ -74,19 +90,17 @@ export default function ScrollImageSequence({
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, x, y, renderWidth, renderHeight);
-    };
+    }, []);
 
-    // Initial render when images are loaded
+    // Initial render when first frame is ready
     useEffect(() => {
-        if (!loading && loadedImages.length > 0) {
-            render(0);
-        }
-    }, [loading, loadedImages]);
+        if (ready) render(0);
+    }, [ready, render]);
 
     // Update on scroll
     useMotionValueEvent(currentIndex, "change", (latest) => {
         const index = Math.round(latest);
-        if (loadedImages.length > 0 && index >= 0 && index < loadedImages.length) {
+        if (index >= 0 && index < images.length && loadedImagesRef.current[index]) {
             render(index);
         }
     });
@@ -95,14 +109,13 @@ export default function ScrollImageSequence({
     useEffect(() => {
         const handleResize = () => {
             const current = Math.round(currentIndex.get());
-            if (loadedImages.length > 0 && current >= 0 && current < loadedImages.length) {
+            if (current >= 0 && current < images.length && loadedImagesRef.current[current]) {
                 render(current);
             }
-        }
+        };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [loadedImages, currentIndex]);
-
+    }, [currentIndex, render, images.length]);
 
     return (
         <canvas

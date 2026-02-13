@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const PROJECTS = [
     {
@@ -15,6 +16,7 @@ const PROJECTS = [
         gradient: "from-blue-600/20 to-purple-600/20",
         image: "/images/BitBond_hero.png",
         video: "/videos/Bitbond_website.mp4",
+        link: "https://www.bitbondit.com/",
     },
     {
         title: "Vault79",
@@ -26,6 +28,7 @@ const PROJECTS = [
         gradient: "from-purple-600/20 to-pink-600/20",
         image: "/images/Vault79_hero.png",
         video: "/videos/Vault79_website.mp4",
+        link: "https://vault79.in/",
     },
     {
         title: "AI Automation Suite",
@@ -35,8 +38,9 @@ const PROJECTS = [
         tags: ["n8n", "Pinecone", "OpenAI", "Python", "RAG"],
         color: "#3b82f6",
         gradient: "from-cyan-600/20 to-blue-600/20",
-        image: null,
+        image: "/images/ai_suite_hero.svg",
         video: null,
+        link: null,
     },
 ];
 
@@ -95,12 +99,12 @@ function ProjectCard({
                 <div className="absolute inset-0 z-0">
                     {/* Fallback Gradient or Image */}
                     {project.image ? (
-                        // Using standard img for simplicity/control with object-cover, or Next Image if preferred. 
-                        // absolute inset-0 w-full h-full object-cover
-                        <img
+                        <Image
                             src={project.image}
                             alt={project.title}
-                            className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-0 transition-opacity duration-500"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 700px"
+                            className="object-cover opacity-80 group-hover:opacity-0 transition-opacity duration-500"
                         />
                     ) : (
                         <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`} />
@@ -114,6 +118,7 @@ function ProjectCard({
                             muted
                             loop
                             playsInline
+                            preload="none"
                             className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                         />
                     )}
@@ -157,10 +162,17 @@ function ProjectCard({
 
                     {/* Links */}
                     <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                        <button className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full text-xs font-bold uppercase tracking-wider hover:bg-neon-blue hover:text-white transition-all">
-                            <ExternalLink className="w-3 h-3" />
-                            View Case Study
-                        </button>
+                        {project.link && (
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full text-xs font-bold uppercase tracking-wider hover:bg-neon-blue hover:text-white transition-all"
+                            >
+                                <ExternalLink className="w-3 h-3" />
+                                Visit Website
+                            </a>
+                        )}
                     </div>
                 </div>
 

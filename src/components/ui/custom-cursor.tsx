@@ -25,8 +25,7 @@ export default function CustomCursor() {
             const clickable =
                 target.closest(
                     "a, button, [data-cursor='pointer'], input, textarea, select, [role='button']"
-                ) !== null ||
-                window.getComputedStyle(target).cursor === "pointer";
+                ) !== null;
             setIsPointer(clickable);
         },
         [dotX, dotY, isVisible]

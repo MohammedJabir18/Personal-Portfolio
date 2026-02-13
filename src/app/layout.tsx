@@ -35,7 +35,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <div className="noise-overlay" />
+
                 <SmoothScrollProvider>
                     <CustomCursor />
                     {children}
