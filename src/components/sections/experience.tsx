@@ -68,7 +68,7 @@ function TimelineCard({
         <motion.div
             initial={{ opacity: 0, x: experience.side === "left" ? -60 : 60 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, amount: 0.3, margin: "-50px" }}
             transition={{ duration: 0.6, type: "spring", stiffness: 80, damping: 15 }}
             className={`relative flex items-start gap-8 ${experience.side === "right" ? "md:flex-row-reverse" : ""
                 }`}
@@ -78,7 +78,7 @@ function TimelineCard({
                 <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.5 }}
                     transition={{ delay: 0.2, type: "spring" }}
                     className="w-4 h-4 rounded-full border-2"
                     style={{ borderColor: experience.color, backgroundColor: `${experience.color}33` }}
@@ -175,7 +175,7 @@ export default function Experience() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.5 }}
                     transition={{ duration: 0.6 }}
                     className="text-center mb-20"
                 >
