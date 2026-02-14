@@ -114,12 +114,12 @@ export default function Hero() {
 
                 {/* 2. HERO TEXT - VELOCITY PARALLAX - TOP LEFT */}
                 {/* Changed items-end -> items-start, pr-6 -> pl-6, text-right -> text-left */}
-                <div className="relative z-10 w-full h-full flex flex-col items-start justify-start pt-32 pl-6 md:pl-12 lg:pl-16 mix-blend-difference overflow-hidden perspective-[1000px]">
+                <div className="relative z-10 w-full h-full flex flex-row gap-3 items-end justify-center pb-32 md:flex-col md:gap-0 md:pb-0 md:items-start md:justify-start md:pt-32 md:pl-12 lg:pl-16 mix-blend-difference overflow-hidden perspective-[1000px]">
 
                     {/* MOHAMMED */}
                     <motion.h1
                         style={{ x: xLine1, skewX, rotate, opacity, filter: useMotionTemplate`blur(${blur})` }}
-                        className="text-[3vw] md:text-[3rem] font-clash font-bold text-white leading-[0.9] tracking-tighter whitespace-nowrap origin-left text-left w-fit"
+                        className="text-3xl md:text-[3rem] font-clash font-bold text-white leading-[0.9] tracking-tighter whitespace-nowrap origin-center md:origin-left text-center md:text-left w-fit"
                     >
                         MOHAMMED
                     </motion.h1>
@@ -127,7 +127,7 @@ export default function Hero() {
                     {/* JABIR */}
                     <motion.h1
                         style={{ x: xLine2, skewX, rotate, opacity, filter: useMotionTemplate`blur(${blur})` }}
-                        className="text-[3vw] md:text-[3rem] font-clash font-bold text-white/60 leading-[0.9] tracking-tighter whitespace-nowrap origin-left text-left text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40 w-fit"
+                        className="text-3xl md:text-[3rem] font-clash font-bold text-white/60 leading-[0.9] tracking-tighter whitespace-nowrap origin-center md:origin-left text-center md:text-left text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40 w-fit"
                     >
                         JABIR
                     </motion.h1>

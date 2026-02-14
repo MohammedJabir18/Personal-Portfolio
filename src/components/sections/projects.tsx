@@ -207,7 +207,7 @@ export default function Projects() {
     return (
         <section
             id="work"
-            className="relative md:h-[250vh]"
+            className="relative md:h-[300vh]"
             ref={containerRef}
         >
             <div className="md:sticky md:top-0 md:h-screen md:overflow-hidden flex flex-col justify-center py-20 md:py-0">
