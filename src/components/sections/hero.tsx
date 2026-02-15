@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionTemplate, useVelocity, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionTemplate, useVelocity } from "framer-motion";
 import Typewriter from "@/components/ui/typewriter";
-import { ChevronDown, ArrowRight, ScanFace, Volume2, VolumeX } from "lucide-react";
+import { ChevronDown, ArrowRight, ScanFace } from "lucide-react";
 import ScrollImageSequence from "@/components/ui/scroll-image-sequence";
 
 import { generateImagePaths } from "@/lib/utils";
@@ -61,41 +61,6 @@ export default function Hero() {
         target: containerRef,
         offset: ["start start", "end end"],
     });
-
-    // --- AUDIO HANDLING ---
-    const [isMuted, setIsMuted] = useState(true);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-
-    useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.volume = 0.5;
-            // Attempt auto-play
-            const playPromise = audioRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise
-                    .then(() => {
-                        // Auto-play started
-                        setIsMuted(false);
-                    })
-                    .catch(() => {
-                        // Auto-play was prevented
-                        setIsMuted(true);
-                    });
-            }
-        }
-    }, []);
-
-    const toggleMute = () => {
-        if (audioRef.current) {
-            if (isMuted) {
-                audioRef.current.play().catch((e) => console.log("Playback failed", e));
-                setIsMuted(false);
-            } else {
-                audioRef.current.pause();
-                setIsMuted(true);
-            }
-        }
-    };
 
     // --- VELOCITY & SKEW EFFECT ---
     const scrollVelocity = useVelocity(scrollY);
@@ -193,7 +158,7 @@ export default function Hero() {
                 <div className="absolute inset-0 z-50 p-6 md:p-12 lg:p-16 flex flex-col justify-between pointer-events-none mix-blend-difference">
                     {/* TOP ROW */}
                     <div className="flex justify-between items-start w-full">
-                        {/* LEFT - Empty */}
+                        {/* LEFT - Empty for now as Text is here, or keep it empty to avoid overlap */}
                         <div />
 
                         {/* RIGHT - Location (Moved here) */}
@@ -206,24 +171,7 @@ export default function Hero() {
                     {/* BOTTOM ROW */}
                     <div className="flex justify-between items-end">
                         {/* ROLE TYPEWRITER */}
-                        <div id="hero-cta" data-testid="view-projects" className="max-w-md pointer-events-auto flex flex-col gap-6">
-
-                            {/* AUDIO TOGGLE (MOVED HERE) */}
-                            <div className="pointer-events-auto">
-                                <button
-                                    onClick={toggleMute}
-                                    className="flex items-center gap-2 text-white/60 hover:text-white transition-colors group"
-                                >
-                                    <div className="p-2 border border-white/20 rounded-full group-hover:border-white/60 transition-colors">
-                                        {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                                    </div>
-                                    <span className="text-[10px] font-geist tracking-[0.2em] uppercase hidden md:block">
-                                        {isMuted ? "Sound Off" : "Sound On"}
-                                    </span>
-                                </button>
-                                <audio ref={audioRef} src="/music/Intro_audio.mp3" loop />
-                            </div>
-
+                        <div id="hero-cta" data-testid="view-projects" className="max-w-md pointer-events-auto">
                             <div className="text-white/80 text-sm md:text-lg font-geist tracking-wide">
                                 <Typewriter
                                     strings={[
