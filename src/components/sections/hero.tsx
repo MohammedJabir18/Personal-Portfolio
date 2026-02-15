@@ -6,12 +6,11 @@ import Typewriter from "@/components/ui/typewriter";
 import { ChevronDown, ArrowRight, ScanFace } from "lucide-react";
 import ScrollImageSequence from "@/components/ui/scroll-image-sequence";
 
+import { generateImagePaths } from "@/lib/utils";
+
 // Generate image paths
 const frameCount = 160;
-const images = Array.from({ length: frameCount }, (_, i) => {
-    const paddedIndex = (i + 1).toString().padStart(3, "0");
-    return `/new-sequence/ezgif-frame-${paddedIndex}.jpg`;
-});
+const images = generateImagePaths(frameCount, "/new-sequence/ezgif-frame-");
 
 // Pre-computed particle positions (avoids Math.random() in render / hydration mismatch)
 const PARTICLES = Array.from({ length: 15 }, (_, i) => ({
