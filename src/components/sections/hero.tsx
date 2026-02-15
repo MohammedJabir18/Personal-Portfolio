@@ -193,21 +193,8 @@ export default function Hero() {
                 <div className="absolute inset-0 z-50 p-6 md:p-12 lg:p-16 flex flex-col justify-between pointer-events-none mix-blend-difference">
                     {/* TOP ROW */}
                     <div className="flex justify-between items-start w-full">
-                        {/* LEFT - AUDIO TOGGLE */}
-                        <div className="pointer-events-auto">
-                            <button
-                                onClick={toggleMute}
-                                className="flex items-center gap-2 text-white/60 hover:text-white transition-colors group"
-                            >
-                                <div className="p-2 border border-white/20 rounded-full group-hover:border-white/60 transition-colors">
-                                    {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                                </div>
-                                <span className="text-[10px] font-geist tracking-[0.2em] uppercase hidden md:block">
-                                    {isMuted ? "Sound Off" : "Sound On"}
-                                </span>
-                            </button>
-                            <audio ref={audioRef} src="/music/Intro_audio.mp3" loop />
-                        </div>
+                        {/* LEFT - Empty */}
+                        <div />
 
                         {/* RIGHT - Location (Moved here) */}
                         <div className="flex flex-col gap-1 items-end text-right mt-12 md:mt-20">
@@ -219,7 +206,24 @@ export default function Hero() {
                     {/* BOTTOM ROW */}
                     <div className="flex justify-between items-end">
                         {/* ROLE TYPEWRITER */}
-                        <div id="hero-cta" data-testid="view-projects" className="max-w-md pointer-events-auto">
+                        <div id="hero-cta" data-testid="view-projects" className="max-w-md pointer-events-auto flex flex-col gap-6">
+
+                            {/* AUDIO TOGGLE (MOVED HERE) */}
+                            <div className="pointer-events-auto">
+                                <button
+                                    onClick={toggleMute}
+                                    className="flex items-center gap-2 text-white/60 hover:text-white transition-colors group"
+                                >
+                                    <div className="p-2 border border-white/20 rounded-full group-hover:border-white/60 transition-colors">
+                                        {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                                    </div>
+                                    <span className="text-[10px] font-geist tracking-[0.2em] uppercase hidden md:block">
+                                        {isMuted ? "Sound Off" : "Sound On"}
+                                    </span>
+                                </button>
+                                <audio ref={audioRef} src="/music/Intro_audio.mp3" loop />
+                            </div>
+
                             <div className="text-white/80 text-sm md:text-lg font-geist tracking-wide">
                                 <Typewriter
                                     strings={[
