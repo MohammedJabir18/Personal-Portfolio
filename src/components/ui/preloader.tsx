@@ -15,7 +15,7 @@ export default function Preloader() {
         document.body.style.overflow = "hidden";
 
         // Generate critical images to preload (first 50 frames)
-        const frameCount = 50; // Preload enough for initial scroll
+        const frameCount = 160; // Load full sequence for Hero section
         const imagesToPreload = generateImagePaths(frameCount, "/new-sequence/ezgif-frame-");
 
         let loadedCount = 0;

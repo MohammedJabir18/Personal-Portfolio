@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/smooth-scroll";
 import CustomCursor from "@/components/ui/custom-cursor";
-import Preloader from "@/components/ui/preloader";
+import Preloader from "../components/ui/preloader";
 
 
 export const metadata: Metadata = {
