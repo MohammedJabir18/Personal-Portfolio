@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ success: false, message: `Google Sheets failed. ${detail}`.trim() }, { status: 500 });
         }
 
-        // 5. Email (fire-and-forget, HTML-escaped)
+        // 5. Email (Awaiting to ensure delivery in Serverless)
         try {
             const safeName = escapeHtml(name.trim());
             const safeEmail = escapeHtml(email.trim());
@@ -144,9 +144,10 @@ export async function POST(req: NextRequest) {
                 },
             });
 
-            transporter.sendMail({
+            await transporter.sendMail({
                 from: process.env.EMAIL_USER,
-                to: process.env.EMAIL_USER,
+                to: process.env.EMAIL_USER, // Send to yourself
+                replyTo: email, // Allow replying to the sender
                 subject: `New Portfolio Contact: ${safeName}`,
                 text: `Name: ${name.trim()}\nEmail: ${email.trim()}\nMessage: ${message.trim()}`,
                 html: `
@@ -156,11 +157,12 @@ export async function POST(req: NextRequest) {
                     <p><strong>Message:</strong></p>
                     <p>${safeMessage}</p>
                 `,
-            }).catch((err: Error) => console.error('❌ Email send error:', err.message));
+            });
 
-            console.log('✅ Email: Queued for delivery');
+            console.log('✅ Email: Sent successfully');
         } catch (emailError) {
-            console.error('❌ Email setup error:', emailError instanceof Error ? emailError.message : emailError);
+            console.error('❌ Email send error:', emailError instanceof Error ? emailError.message : emailError);
+            // We don't fail the request if email fails but sheets succeeded, but we log it.
         }
 
         return NextResponse.json({ success: true, message: 'Message sent successfully!' });
