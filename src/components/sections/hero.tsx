@@ -94,9 +94,10 @@ export default function Hero() {
     const overlayOpacity = useTransform(scrollYProgress, [0, 0.2], [0.4, 0.8]);
 
     // --- SCROLL-END QUOTE REVEAL ---
-    const quoteOpacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
-    const quoteY = useTransform(scrollYProgress, [0.7, 1], ["20%", "0%"]);
-    const quoteScale = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
+    // Start at Frame 145/160 (~0.9) - Fully visible slightly before end (0.97)
+    const quoteOpacity = useTransform(scrollYProgress, [0.88, 0.97], [0, 1]);
+    const quoteY = useTransform(scrollYProgress, [0.88, 0.97], ["20px", "0px"]);
+    const quoteScale = useTransform(scrollYProgress, [0.88, 0.97], [0.9, 1]);
 
     return (
         <section id="hero" ref={containerRef} className="relative h-[640vh] bg-black">
@@ -139,16 +140,16 @@ export default function Hero() {
 
                 </div>
 
-                {/* 2.5 SCROLL-END QUOTE - CENTERED */}
+                {/* 2.5 SCROLL-END QUOTE - CENTERED BOTTOM */}
                 <motion.div
                     style={{ opacity: quoteOpacity, y: quoteY, scale: quoteScale }}
-                    className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none"
+                    className="absolute inset-0 z-[60] flex flex-col items-center justify-end pb-32 md:pb-48 pointer-events-none"
                 >
-                    <span className="text-sm md:text-xl font-geist tracking-[0.5em] text-white/80 mb-4 uppercase">Crafting</span>
-                    <h2 className="text-5xl md:text-8xl lg:text-[10rem] font-clash font-bold text-white/10 [-webkit-text-stroke:1px_rgba(255,255,255,0.5)] leading-[0.8] tracking-tighter text-center">
+                    <span className="text-xs md:text-sm font-geist tracking-[0.5em] text-white/80 mb-2 uppercase">Crafting</span>
+                    <h2 className="text-4xl md:text-6xl font-clash font-bold text-white/10 [-webkit-text-stroke:1px_rgba(255,255,255,0.8)] leading-[0.9] tracking-tighter text-center">
                         DIGITAL
                     </h2>
-                    <h2 className="text-5xl md:text-8xl lg:text-[10rem] font-clash font-bold text-white leading-[0.8] tracking-tighter text-center drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
+                    <h2 className="text-4xl md:text-6xl font-clash font-bold text-white leading-[0.9] tracking-tighter text-center drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
                         PERFECTION
                     </h2>
                 </motion.div>
