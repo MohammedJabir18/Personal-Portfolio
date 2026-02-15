@@ -4,9 +4,8 @@ import SmoothScrollProvider from "@/components/providers/smooth-scroll";
 import CustomCursor from "@/components/ui/custom-cursor";
 
 export const metadata: Metadata = {
-    title: "Mohammed Jabir M — AI & Automation Specialist | Full-Stack Developer",
-    description:
-        "Results-driven specialist building intelligent systems and data-driven solutions. Leveraging Next.js, n8n, and AI tools to deliver business outcomes.",
+    title: "Mohammed Jabir | AI & Automation Specialist",
+    description: "Portfolio of a Full-Stack Developer and AI Specialist.",
     keywords: [
         "Mohammed Jabir",
         "Full-Stack Developer",
@@ -18,12 +17,19 @@ export const metadata: Metadata = {
         "Portfolio",
     ],
     openGraph: {
-        title: "Mohammed Jabir M — Portfolio",
-        description:
-            "AI & Automation Specialist | Full-Stack Developer | Business Intelligence Analyst",
+        title: "Mohammed Jabir | AI & Automation Specialist",
+        description: "Portfolio of a Full-Stack Developer and AI Specialist.",
         url: "https://mohammedjabir.me",
         siteName: "Mohammed Jabir M",
         type: "website",
+        images: [
+            {
+                url: "/opengraph-image.png",
+                width: 1200,
+                height: 630,
+                alt: "Mohammed Jabir - AI & Automation Specialist",
+            },
+        ],
     },
 };
 
