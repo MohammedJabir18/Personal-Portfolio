@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, Globe, Copy, Check, Send } from "lucide-react";
+import Notification from "@/components/ui/notification";
 
 // Simple confetti explosion
 function createConfetti(container: HTMLDivElement) {
@@ -47,12 +48,18 @@ export default function Contact() {
     const [copied, setCopied] = useState(false);
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
     const [isSending, setIsSending] = useState(false);
+    const [notification, setNotification] = useState<{ show: boolean; type: "success" | "error"; message: string }>({
+        show: false,
+        type: "success",
+        message: "",
+    });
     const buttonRef = useRef<HTMLDivElement>(null);
 
     const handleCopyEmail = useCallback(() => {
         navigator.clipboard.writeText("jabirahmedz111@gmail.com");
         setCopied(true);
         if (buttonRef.current) createConfetti(buttonRef.current);
+        setNotification({ show: true, type: "success", message: "Email copied to clipboard!" }); // Optional nice touch
         setTimeout(() => setCopied(false), 2000);
     }, []);
 
@@ -66,15 +73,16 @@ export default function Contact() {
                 body: JSON.stringify(formData),
             });
             const data = await response.json();
+
             if (data.success) {
-                alert("Message sent successfully!");
+                setNotification({ show: true, type: "success", message: "Message sent successfully!" });
                 setFormData({ name: "", email: "", message: "" });
             } else {
-                alert("Failed to send message: " + data.message);
+                setNotification({ show: true, type: "error", message: data.message || "Failed to send message." });
             }
         } catch (error) {
             console.error(error);
-            alert("An error occurred. Please try again.");
+            setNotification({ show: true, type: "error", message: "An error occurred. Please try again." });
         } finally {
             setIsSending(false);
         }
@@ -240,6 +248,13 @@ export default function Contact() {
                     </p>
 
                 </motion.div>
+
+                <Notification
+                    type={notification.type}
+                    message={notification.message}
+                    isVisible={notification.show}
+                    onClose={() => setNotification(prev => ({ ...prev, show: false }))}
+                />
             </div>
         </section>
     );
