@@ -24,14 +24,7 @@ export const metadata: Metadata = {
         description: "Portfolio of a Full-Stack Developer and AI Specialist.",
         url: "https://mohammedjabir.me",
         siteName: "Mohammed Jabir M",
-        images: [
-            {
-                url: "/opengraph-image.png",
-                width: 1200,
-                height: 630,
-                alt: "Mohammed Jabir | AI & Automation Specialist",
-            },
-        ],
+
         type: "website",
     },
 };
