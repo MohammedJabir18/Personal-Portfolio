@@ -4,6 +4,7 @@ import SmoothScrollProvider from "@/components/providers/smooth-scroll";
 import CustomCursor from "@/components/ui/custom-cursor";
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://mohammedjabir.me"),
     title: "Mohammed Jabir | AI & Automation Specialist",
     description: "Portfolio of a Full-Stack Developer and AI Specialist.",
     keywords: [
