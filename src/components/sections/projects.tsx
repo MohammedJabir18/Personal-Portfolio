@@ -199,7 +199,7 @@ export default function Projects() {
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start start", "end end"],
+        offset: ["start end", "end start"],
     });
 
     const x = useTransform(scrollYProgress, [0, 1], ["2%", "-65%"]);
@@ -229,6 +229,7 @@ export default function Projects() {
 
                 {/* Projects Container */}
                 <motion.div
+                    id="projects-container"
                     style={{ x: isDesktop ? x : 0 }}
                     className="flex flex-col md:flex-row gap-8 px-[5vw] md:pl-[5vw]"
                 >

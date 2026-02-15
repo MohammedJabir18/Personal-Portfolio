@@ -198,7 +198,7 @@ export default function Experience() {
                     </div>
 
                     {/* Cards */}
-                    <div className="space-y-12">
+                    <div id="experience-timeline" role="list" className="space-y-12">
                         {EXPERIENCES.map((exp, i) => (
                             <TimelineCard key={i} experience={exp} index={i} />
                         ))}

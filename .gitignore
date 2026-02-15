@@ -31,3 +31,7 @@ next-env.d.ts
 
 # Vercel
 .vercel
+
+# Service Account Keys (NEVER commit these)
+portfolio-contact-form-*.json
+*-credentials.json

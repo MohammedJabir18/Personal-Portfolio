@@ -1,0 +1,105 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - Next.js 14 (App Router)
+  - React 18
+  - Tailwind CSS
+  - Framer Motion
+  - Lucide React (icons)
+  - Lenis (smooth scroll)
+routes:
+  - path: /
+    file: src/app/page.tsx
+    auth_required: false
+    description: Main single-page portfolio with all sections (Hero, About, Experience, Projects, Contact)
+  - path: /api/contact
+    file: src/app/api/contact/route.ts
+    auth_required: false
+    description: API endpoint for contact form submissions (Google Sheets + Email)
+features:
+  - name: Hero Section
+    description: Landing section with animated name display, typewriter subtitle, and scroll indicator
+    files:
+      - src/components/sections/hero.tsx
+      - src/components/ui/typewriter.tsx
+    entry_route: /
+    user_interactions:
+      - View animated hero text on page load
+      - Scroll down to navigate to other sections
+    api_calls: []
+    auth_required: false
+  - name: Navigation Bar
+    description: Sticky navbar with section links and scroll-based active state
+    files:
+      - src/components/sections/navbar.tsx
+    entry_route: /
+    user_interactions:
+      - Click navigation links to scroll to sections
+      - See active section highlighted in navbar
+    api_calls: []
+    auth_required: false
+  - name: About Section
+    description: Bento grid layout with animated counters, text reveal animations, and skills showcase
+    files:
+      - src/components/sections/about-bento.tsx
+      - src/components/ui/animated-counter.tsx
+      - src/components/ui/text-reveal.tsx
+      - src/components/ui/spotlight-card.tsx
+    entry_route: /
+    user_interactions:
+      - Scroll into view to trigger counter and text animations
+      - Hover over spotlight cards for interactive effects
+    api_calls: []
+    auth_required: false
+  - name: Experience Section
+    description: Timeline of work experience with scroll-triggered animations
+    files:
+      - src/components/sections/experience.tsx
+    entry_route: /
+    user_interactions:
+      - Scroll to reveal experience timeline entries
+    api_calls: []
+    auth_required: false
+  - name: Projects Section
+    description: Horizontal scrolling project cards with 3D tilt, video previews, and external links
+    files:
+      - src/components/sections/projects.tsx
+    entry_route: /
+    user_interactions:
+      - Scroll vertically to trigger horizontal project card movement
+      - Hover over project cards to see video previews and tilt effect
+      - Click Visit Website link to open project in new tab
+    api_calls: []
+    auth_required: false
+  - name: Contact Form
+    description: Contact form that submits data to Google Sheets and sends email notification
+    files:
+      - src/components/sections/contact.tsx
+      - src/app/api/contact/route.ts
+    entry_route: /
+    user_interactions:
+      - Fill in Name input field
+      - Fill in Email input field
+      - Fill in Message textarea
+      - Click Send Message button to submit
+      - See success or error alert after submission
+      - Click Copy Email button to copy email to clipboard
+    api_calls:
+      - method: POST
+        endpoint: /api/contact
+    auth_required: false
+  - name: Custom Cursor
+    description: Custom animated cursor that follows mouse movement with spring physics
+    files:
+      - src/components/ui/custom-cursor.tsx
+    entry_route: /
+    user_interactions:
+      - Move mouse to see custom cursor follow
+      - Hover over interactive elements to see cursor change
+    api_calls: []
+    auth_required: false
+known_limitations:
+  - issue: Contact form uses alert() for success/error feedback instead of inline toast notifications
+    location: src/components/sections/contact.tsx
+    impact: User experience is functional but not premium

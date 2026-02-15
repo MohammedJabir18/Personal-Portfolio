@@ -94,7 +94,7 @@ export default function Hero() {
     const overlayOpacity = useTransform(scrollYProgress, [0, 0.2], [0.4, 0.8]);
 
     return (
-        <section ref={containerRef} className="relative h-[300vh] bg-black">
+        <section id="hero" ref={containerRef} className="relative h-[300vh] bg-black">
             {/* STICKY CONTAINER */}
             <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col">
 
@@ -151,7 +151,7 @@ export default function Hero() {
                     {/* BOTTOM ROW */}
                     <div className="flex justify-between items-end">
                         {/* ROLE TYPEWRITER */}
-                        <div className="max-w-md pointer-events-auto">
+                        <div id="hero-cta" data-testid="view-projects" className="max-w-md pointer-events-auto">
                             <div className="text-white/80 text-sm md:text-lg font-geist tracking-wide">
                                 <Typewriter
                                     strings={[

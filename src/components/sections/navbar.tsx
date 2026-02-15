@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "@/components/ui/magnetic-button";
 import { Menu, X } from "lucide-react";
+import { useLenis } from "@/components/providers/smooth-scroll";
 
 const NAV_LINKS = [
     { label: "About", href: "#about" },
@@ -14,10 +15,11 @@ const NAV_LINKS = [
 ];
 
 function NavbarLogo() {
+    const lenis = useLenis();
     return (
         <MagneticButton
             className="group relative flex items-center gap-3 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 backdrop-blur-md overflow-hidden"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0, behavior: "smooth" })}
         >
             {/* Avatar */}
             <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-neon-blue/50 group-hover:border-neon-blue transition-colors duration-300 flex-shrink-0">
@@ -45,6 +47,8 @@ export default function Navbar() {
     const [isHidden, setIsHidden] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const lenis = useLenis();
+    const isScrollingRef = useRef(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -58,11 +62,25 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
-    const scrollTo = (href: string) => {
+    // Debounced scroll to prevent race conditions on rapid clicks
+    const scrollTo = useCallback((href: string) => {
+        if (isScrollingRef.current) return;
+        isScrollingRef.current = true;
+
         setIsMobileOpen(false);
-        const el = document.querySelector(href);
-        el?.scrollIntoView({ behavior: "smooth" });
-    };
+
+        if (lenis) {
+            lenis.scrollTo(href, { duration: 1.2 });
+        } else {
+            const el = document.querySelector(href);
+            el?.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Debounce: block further scrolls for 300ms
+        setTimeout(() => {
+            isScrollingRef.current = false;
+        }, 300);
+    }, [lenis]);
 
     return (
         <>

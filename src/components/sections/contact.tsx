@@ -59,10 +59,25 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSending(true);
-        // Simulate send
-        await new Promise((r) => setTimeout(r, 1000));
-        setIsSending(false);
-        setFormData({ name: "", email: "", message: "" });
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            const data = await response.json();
+            if (data.success) {
+                alert("Message sent successfully!");
+                setFormData({ name: "", email: "", message: "" });
+            } else {
+                alert("Failed to send message: " + data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("An error occurred. Please try again.");
+        } finally {
+            setIsSending(false);
+        }
     };
 
     return (
@@ -194,6 +209,7 @@ export default function Contact() {
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                     rows={4}
+                                    maxLength={2000}
                                     className="w-full bg-transparent border-b border-noir-border px-0 py-4 text-white font-geist text-sm placeholder:text-noir-muted focus:outline-none focus:border-neon-blue transition-colors duration-300 resize-none"
                                     required
                                 />
@@ -222,11 +238,7 @@ export default function Contact() {
                     <p className="text-xs font-geist text-noir-muted">
                         © 2026 Mohammed Jabir M. All rights reserved.
                     </p>
-                    <p className="text-xs font-geist text-noir-muted">
-                        Designed & Built with
-                        <span className="text-neon-blue mx-1">♥</span>
-                        using Next.js & Framer Motion
-                    </p>
+
                 </motion.div>
             </div>
         </section>

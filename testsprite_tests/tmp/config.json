@@ -1,0 +1,19 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "loginUser": "jabirahmedz111@gmail.com",
+  "loginPassword": "Bloody-hell18",
+  "executionArgs": {
+    "projectName": "My Portfolio",
+    "projectPath": "d:/My Codings/My Portfolio",
+    "testIds": [],
+    "additionalInstruction": "The site is a single-page portfolio running on localhost:3000 with no login required. Test the contact form, navigation, and page rendering.",
+    "envs": {
+      "API_KEY": "sk-user-1D0dT8H4gnv2KWsIjceqAcZ5XK6lvhcXBVY4qUXItyAjkfTOgwNTOOOYZnWkT0dtXDEApYEpdPf36Yx73_H4m1l3LHh7maseUlue5dwmxaXclxEKpnNp6ICvx6S6bsZ-dds"
+    }
+  },
+  "serverPort": 49680,
+  "proxy": "http://5b839b72-afaa-4c19-8581-b25acb14174d:GLAic6wrEDf8UZ7ppsPl1Hb62iIVi305@tun.testsprite.com:8080"
+}

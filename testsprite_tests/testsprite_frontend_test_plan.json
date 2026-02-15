@@ -1,0 +1,800 @@
+[
+  {
+    "id": "TC001",
+    "title": "Hero content renders on initial load",
+    "description": "Verifies the hero section headline and typewriter subtitle are visible when the homepage loads.",
+    "category": "Hero Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Hero section\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"View Projects\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Download Resume\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Typewriter subtitle\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "View Projects CTA scrolls to Projects section",
+    "description": "Verifies clicking the View Projects CTA brings the Projects section into view.",
+    "category": "Hero Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"View Projects\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"View Projects\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Projects section\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Scroll down from hero reaches Projects section (no CTA)",
+    "description": "Verifies manual scrolling from the hero can reach the Projects section.",
+    "category": "Hero Section",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Hero section\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Projects section\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Projects section\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Hero section remains interactive after animations settle",
+    "description": "Verifies that after waiting for initial animations, CTAs remain visible and clickable.",
+    "category": "Hero Section",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Wait for element \"Typewriter subtitle\" to be visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"View Projects\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Download Resume\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"View Projects\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Projects section\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Repeated View Projects clicks keep Projects section in view",
+    "description": "Verifies repeated clicks on View Projects consistently land on the Projects section without navigation errors.",
+    "category": "Hero Section",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"View Projects\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Projects section\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Hero section\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Hero section\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"View Projects\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Projects section\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "About section text reveal animations trigger on first view",
+    "description": "Verifies that the About section becomes visible and its reveal content appears when scrolled into view.",
+    "category": "About Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" section heading is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the \"About\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" section heading is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"About\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" bento grid content is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "About section content remains readable after scrolling past and back",
+    "description": "Verifies that About content is still present and visible when the user scrolls away and returns to the About section.",
+    "category": "About Section",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the \"About\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" bento grid content is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the top of the page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the \"About\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" bento grid content is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Reduced motion or animation-disabled scenario shows static About content",
+    "description": "Verifies that if animations do not run, the About section still displays static text and counters without blocking content visibility.",
+    "category": "About Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the \"About\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" bento grid content is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"counter\" in the About section is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"skills\" content in the About section is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"spotlight card\" in the About section is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "About section counters and reveal content appear without requiring precise scroll position",
+    "description": "Verifies that scrolling into the About section from different positions still results in visible content (no dead zone).",
+    "category": "About Section",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll slowly until the \"About\" section heading first becomes visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" section heading is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll a small amount further down"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"About\" bento grid content is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"counter\" in the About section is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"spotlight card\" in the About section is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Experience section is reachable from the home page",
+    "description": "Verifies the user can scroll to the Experience section and see its heading and timeline container.",
+    "category": "Experience Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Hero\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Experience\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Experience timeline entries appear when scrolled into view",
+    "description": "Verifies that experience entries become visible as the user scrolls into the Experience section.",
+    "category": "Experience Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down within the \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"First experience timeline entry\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down within the \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Second experience timeline entry\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Sequential reveal while slowly scrolling through Experience section",
+    "description": "Verifies multiple timeline entries become visible progressively as the user scrolls through the section.",
+    "category": "Experience Section",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down slightly within the \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Next experience timeline entry\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down slightly within the \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Another experience timeline entry\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the bottom of the \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Last experience timeline entry\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Experience timeline remains visible after scrolling past and returning",
+    "description": "Verifies the Experience timeline and entries remain visible after the user scrolls away and comes back.",
+    "category": "Experience Section",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down until \"Projects\" section is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Projects\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll up to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"At least one experience timeline entry\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Experience section still displays entries when animations do not trigger",
+    "description": "Verifies that timeline entries are visible as static content even if reveal animations fail to trigger.",
+    "category": "Experience Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Experience\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Wait for \"Experience timeline\" to appear"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"At least one experience timeline entry\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Experience section content is readable and not empty",
+    "description": "Verifies the Experience section shows meaningful timeline content (not blank placeholders).",
+    "category": "Experience Section",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Company\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Role\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Date\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Experience section works with smooth scrolling without losing section context",
+    "description": "Verifies that scrolling to and through the Experience section keeps the user on the home page and the section remains stable.",
+    "category": "Experience Section",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Experience\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down within the \"Experience\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience timeline\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Projects section responds to vertical scrolling with horizontal card movement",
+    "description": "Verifies that the Projects showcase becomes visible and project cards move horizontally as the user scrolls down the page.",
+    "category": "Projects Section",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Projects\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the \"Projects\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a project card\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down within the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a different project card is visible (indicating horizontal movement to new cards)"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down within the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify another new project card is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Submit contact form successfully shows success alert",
+    "description": "Verifies a valid contact form submission results in a visible success alert.",
+    "category": "Contact Form",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the Contact section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the Name input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"test.user@example.com\" into the Email input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Hello, this is a test message from an automated UI test.\" into the Message textarea"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button to submit"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Success\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an alert is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Submit contact form with missing required fields shows error alert",
+    "description": "Verifies the form blocks submission and shows an error alert when required fields are missing.",
+    "category": "Contact Form",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the Contact section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the Name input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"test.user@example.com\" into the Email input field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button to submit"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Error\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an alert is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Submit contact form with invalid email format shows error alert",
+    "description": "Verifies an invalid email format leads to a visible error alert rather than a success alert.",
+    "category": "Contact Form",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the Contact section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the Name input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"invalid-email\" into the Email input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Testing invalid email validation.\" into the Message textarea"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button to submit"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Error\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an alert is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Resubmission after an error can succeed and shows success alert",
+    "description": "Verifies the user can correct inputs after an error and successfully submit the form.",
+    "category": "Contact Form",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the Contact section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the Name input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"invalid-email\" into the Email input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"First attempt should fail.\" into the Message textarea"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button to submit"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an alert is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"test.user@example.com\" into the Email input field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button to submit"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an alert is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Success\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Long message content can be submitted and shows success alert",
+    "description": "Verifies the contact form accepts a longer message and still completes submission successfully.",
+    "category": "Contact Form",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the Contact section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the Name input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"test.user@example.com\" into the Email input field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"This is a longer test message intended to validate that the message field can handle more content without breaking the submission flow. It includes multiple sentences to increase length and mimic a realistic inquiry from a recruiter or client.\" into the Message textarea"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button to submit"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an alert is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Success\" is visible"
+      }
+    ]
+  }
+]
