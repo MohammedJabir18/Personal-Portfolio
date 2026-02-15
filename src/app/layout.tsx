@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/smooth-scroll";
 import CustomCursor from "@/components/ui/custom-cursor";
+import Preloader from "@/components/ui/preloader";
+
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://mohammedjabir.me"),
@@ -23,18 +25,11 @@ export const metadata: Metadata = {
         url: "https://mohammedjabir.me",
         siteName: "Mohammed Jabir M",
         type: "website",
-        images: [
-            {
-                url: "/opengraph-image.png",
-                width: 1200,
-                height: 630,
-                alt: "Mohammed Jabir - AI & Automation Specialist",
-            },
-        ],
     },
 };
 
-import Preloader from "@/components/ui/preloader";
+
+
 
 export default function RootLayout({
     children,
