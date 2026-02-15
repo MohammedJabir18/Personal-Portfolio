@@ -7,10 +7,10 @@ import { ChevronDown, ArrowRight, ScanFace } from "lucide-react";
 import ScrollImageSequence from "@/components/ui/scroll-image-sequence";
 
 // Generate image paths
-const frameCount = 75;
+const frameCount = 160;
 const images = Array.from({ length: frameCount }, (_, i) => {
     const paddedIndex = (i + 1).toString().padStart(3, "0");
-    return `/scroll-sequence/ezgif-frame-${paddedIndex}.jpg`;
+    return `/new-sequence/ezgif-frame-${paddedIndex}.jpg`;
 });
 
 // Pre-computed particle positions (avoids Math.random() in render / hydration mismatch)
@@ -93,8 +93,13 @@ export default function Hero() {
     // Cinematic Vignette
     const overlayOpacity = useTransform(scrollYProgress, [0, 0.2], [0.4, 0.8]);
 
+    // --- SCROLL-END QUOTE REVEAL ---
+    const quoteOpacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
+    const quoteY = useTransform(scrollYProgress, [0.7, 1], ["20%", "0%"]);
+    const quoteScale = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
+
     return (
-        <section id="hero" ref={containerRef} className="relative h-[300vh] bg-black">
+        <section id="hero" ref={containerRef} className="relative h-[640vh] bg-black">
             {/* STICKY CONTAINER */}
             <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col">
 
@@ -133,6 +138,20 @@ export default function Hero() {
                     </motion.h1>
 
                 </div>
+
+                {/* 2.5 SCROLL-END QUOTE - CENTERED */}
+                <motion.div
+                    style={{ opacity: quoteOpacity, y: quoteY, scale: quoteScale }}
+                    className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none"
+                >
+                    <span className="text-sm md:text-xl font-geist tracking-[0.5em] text-white/80 mb-4 uppercase">Crafting</span>
+                    <h2 className="text-5xl md:text-8xl lg:text-[10rem] font-clash font-bold text-white/10 [-webkit-text-stroke:1px_rgba(255,255,255,0.5)] leading-[0.8] tracking-tighter text-center">
+                        DIGITAL
+                    </h2>
+                    <h2 className="text-5xl md:text-8xl lg:text-[10rem] font-clash font-bold text-white leading-[0.8] tracking-tighter text-center drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
+                        PERFECTION
+                    </h2>
+                </motion.div>
 
                 {/* 3. CORNER UI ELEMENTS (Static/Fade) */}
                 <div className="absolute inset-0 z-50 p-6 md:p-12 lg:p-16 flex flex-col justify-between pointer-events-none mix-blend-difference">
