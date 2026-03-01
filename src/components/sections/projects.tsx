@@ -42,6 +42,18 @@ const PROJECTS = [
         video: null,
         link: null,
     },
+    {
+        title: "InvoiceFlow",
+        subtitle: "Local-First Financial Tool",
+        description:
+            "Awwwards-tier local-first invoice management desktop app built with Rust and Tauri. Features smart drafts, auto-save, global state synchronization, and real-time analytics.",
+        tags: ["Rust", "Tauri", "React", "Zustand"],
+        color: "#10b981",
+        gradient: "from-emerald-600/20 to-teal-600/20",
+        image: null,
+        video: null,
+        link: "https://github.com/MohammedJabir18/InvoiceFlow",
+    },
 ];
 
 function ProjectCard({
