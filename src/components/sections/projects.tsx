@@ -44,23 +44,27 @@ const PROJECTS = [
     },
     {
         title: "InvoiceFlow",
-        subtitle: "Local-First Financial Tool",
+        subtitle: "Local-First Financial Engine",
         description:
-            "Awwwards-tier local-first invoice management desktop app built with Rust and Tauri. Features smart drafts, auto-save, global state synchronization, and real-time analytics.",
-        tags: ["Rust", "Tauri", "React", "Zustand"],
-        color: "#10b981",
-        gradient: "from-emerald-600/20 to-teal-600/20",
+            "Awwwards-tier local-first invoice management desktop app built with Rust and Tauri. Engineered for absolute privacy, sub-millisecond data sync, and real-time Revenue Pulse analytics.",
+        tags: ["Rust 🦀", "Tauri", "React", "Zero-Knowledge"],
+        color: "#00f0ff", // Sci-fi cyber-cyan
+        gradient: "from-[#051821] via-[#0a2e3f] to-[#041116]",
         image: null,
         video: null,
+        isPremium: true,
         link: "https://github.com/MohammedJabir18/InvoiceFlow",
     },
 ];
+
+// Add an optional isPremium flag to the union
+type ProjectType = (typeof PROJECTS)[0] & { isPremium?: boolean };
 
 function ProjectCard({
     project,
     index,
 }: {
-    project: (typeof PROJECTS)[0];
+    project: ProjectType;
     index: number;
 }) {
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -136,7 +140,25 @@ function ProjectCard({
                     )}
 
                     {/* Dark Gradient Overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-75" />
+
+                    {/* Premium Cyber Overlay */}
+                    {project.isPremium && (
+                        <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden mix-blend-screen opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+                            {/* Animated Grid */}
+                            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,240,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,240,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] animate-[pulse_4s_ease-in-out_Infinity]" />
+
+                            {/* Scanning Laser Line */}
+                            <motion.div
+                                animate={{ y: ["-10%", "110%"] }}
+                                transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                                className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent shadow-[0_0_15px_#00f0ff]"
+                            />
+
+                            {/* Data Streams / Particles */}
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.15),transparent_70%)]" />
+                        </div>
+                    )}
                 </div>
 
                 {/* Project Number - Moved/Styled */}

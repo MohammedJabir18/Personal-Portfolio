@@ -1,0 +1,31 @@
+1
+
+,  ▲ Next.js 14.2.35
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+,Failed to compile.
+
+./src/app/layout.tsx
+Module not found: Can't resolve '@vercel/analytics/next'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+
+20980
+  ▲ Next.js 14.2.35
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+
+Failed to compile.
+
+./src/app/layout.tsx
+Module not found: Can't resolve '@vercel/analytics/next'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
