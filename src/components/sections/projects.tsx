@@ -236,12 +236,12 @@ export default function Projects() {
         offset: ["start end", "end start"],
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["2%", "-65%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["2%", "-75%"]);
 
     return (
         <section
             id="work"
-            className="relative md:h-[300vh]"
+            className="relative md:h-[400vh]"
             ref={containerRef}
         >
             <div className="md:sticky md:top-0 md:h-screen md:overflow-hidden flex flex-col justify-center py-20 md:py-0">
