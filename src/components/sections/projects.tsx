@@ -7,6 +7,19 @@ import { ExternalLink } from "lucide-react";
 
 const PROJECTS = [
     {
+        title: "InvoiceFlow",
+        subtitle: "Local-First Financial Engine",
+        description:
+            "Awwwards-tier local-first invoice management desktop app built with Rust and Tauri. Engineered for absolute privacy, sub-millisecond data sync, and real-time Revenue Pulse analytics.",
+        tags: ["Rust 🦀", "Tauri", "React", "Zero-Knowledge"],
+        color: "#00f0ff", // Sci-fi cyber-cyan
+        gradient: "from-[#051821] via-[#0a2e3f] to-[#041116]",
+        image: null,
+        video: null,
+        isPremium: true,
+        link: "https://github.com/MohammedJabir18/InvoiceFlow",
+    },
+    {
         title: "BitBondit",
         subtitle: "Enterprise SaaS Platform",
         description:
@@ -41,19 +54,6 @@ const PROJECTS = [
         image: "/images/ai_suite_hero.svg",
         video: null,
         link: null,
-    },
-    {
-        title: "InvoiceFlow",
-        subtitle: "Local-First Financial Engine",
-        description:
-            "Awwwards-tier local-first invoice management desktop app built with Rust and Tauri. Engineered for absolute privacy, sub-millisecond data sync, and real-time Revenue Pulse analytics.",
-        tags: ["Rust 🦀", "Tauri", "React", "Zero-Knowledge"],
-        color: "#00f0ff", // Sci-fi cyber-cyan
-        gradient: "from-[#051821] via-[#0a2e3f] to-[#041116]",
-        image: null,
-        video: null,
-        isPremium: true,
-        link: "https://github.com/MohammedJabir18/InvoiceFlow",
     },
 ];
 
@@ -222,21 +222,33 @@ function ProjectCard({
 
 export default function Projects() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isDesktop, setIsDesktop] = useState(false);
+    const [scrollRange, setScrollRange] = useState(0);
 
     useEffect(() => {
-        const checkDesktop = () => setIsDesktop(window.innerWidth >= 768);
-        checkDesktop();
-        window.addEventListener("resize", checkDesktop);
-        return () => window.removeEventListener("resize", checkDesktop);
+        const updateLayout = () => {
+            setIsDesktop(window.innerWidth >= 768);
+            if (scrollContainerRef.current) {
+                const scrollWidth = scrollContainerRef.current.scrollWidth;
+                const viewportWidth = window.innerWidth;
+                const maxScroll = scrollWidth - viewportWidth + (viewportWidth * 0.05); // Add 5vw padding gap on right
+                setScrollRange(maxScroll > 0 ? -maxScroll : 0);
+            }
+        };
+
+        updateLayout();
+        setTimeout(updateLayout, 100);
+        window.addEventListener("resize", updateLayout);
+        return () => window.removeEventListener("resize", updateLayout);
     }, []);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start end", "end start"],
+        offset: ["start start", "end end"],
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["2%", "-85%"]);
+    const x = useTransform(scrollYProgress, [0, 1], [0, scrollRange]);
 
     return (
         <section
@@ -263,9 +275,10 @@ export default function Projects() {
 
                 {/* Projects Container */}
                 <motion.div
+                    ref={scrollContainerRef}
                     id="projects-container"
                     style={{ x: isDesktop ? x : 0 }}
-                    className="flex flex-col md:flex-row gap-8 px-[5vw] md:pl-[5vw]"
+                    className="flex flex-col md:flex-row gap-8 px-[5vw] md:w-max"
                 >
                     {PROJECTS.map((project, i) => (
                         <ProjectCard key={project.title} project={project} index={i} />
