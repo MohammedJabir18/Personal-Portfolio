@@ -236,7 +236,7 @@ export default function Projects() {
         offset: ["start end", "end start"],
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["2%", "-75%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["2%", "-85%"]);
 
     return (
         <section
