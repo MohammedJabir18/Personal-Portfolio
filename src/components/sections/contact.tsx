@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, Globe, Copy, Check, Send } from "lucide-react";
 import Notification from "@/components/ui/notification";
@@ -100,7 +100,7 @@ export default function Contact() {
                     className="text-center mb-20"
                 >
                     <p className="text-xs font-geist text-neon-blue tracking-widest uppercase mb-6">
-            // Get in Touch
+                        {/* Get in Touch */}
                     </p>
                     <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-clash font-bold text-white tracking-tight">
                         LET&apos;S{" "}

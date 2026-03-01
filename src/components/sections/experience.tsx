@@ -57,10 +57,8 @@ const EXPERIENCES = [
 
 function TimelineCard({
     experience,
-    index,
 }: {
     experience: (typeof EXPERIENCES)[0];
-    index: number;
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -180,7 +178,7 @@ export default function Experience() {
                     className="text-center mb-20"
                 >
                     <p className="text-xs font-geist text-neon-blue tracking-widest uppercase mb-4">
-            // The Journey
+                        {/* The Journey */}
                     </p>
                     <h2 className="text-4xl md:text-5xl font-clash font-bold text-white">
                         Experience
@@ -200,7 +198,7 @@ export default function Experience() {
                     {/* Cards */}
                     <div id="experience-timeline" role="list" className="space-y-12">
                         {EXPERIENCES.map((exp, i) => (
-                            <TimelineCard key={i} experience={exp} index={i} />
+                            <TimelineCard key={i} experience={exp} />
                         ))}
                     </div>
                 </div>

@@ -231,7 +231,7 @@ export default function Projects() {
                         transition={{ duration: 0.6 }}
                     >
                         <p className="text-xs font-geist text-neon-purple tracking-widest uppercase mb-4">
-                // Selected Work
+                            {/* Selected Work */}
                         </p>
                         <h2 className="text-4xl md:text-5xl font-clash font-bold text-white">
                             Projects

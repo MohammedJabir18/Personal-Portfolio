@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionTemplate, useVelocity } from "framer-motion";
 import Typewriter from "@/components/ui/typewriter";
-import { ChevronDown, ArrowRight, ScanFace } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import ScrollImageSequence from "@/components/ui/scroll-image-sequence";
 
 import { generateImagePaths } from "@/lib/utils";
@@ -67,9 +67,6 @@ export default function Hero() {
     const smoothVelocity = useSpring(scrollVelocity, {
         damping: 50,
         stiffness: 400
-    });
-    const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-        clamp: false
     });
 
     // Skew and Rotate based on velocity for "Warp Speed" feel
@@ -179,7 +176,6 @@ export default function Hero() {
                                         "Engineering The Impossible",
                                         "AI & Automation Specialist",
                                     ]}
-                                    loop={true}
                                     cursor="_"
                                     typingSpeed={50}
                                 />

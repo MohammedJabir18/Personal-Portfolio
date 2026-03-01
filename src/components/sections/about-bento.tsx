@@ -60,7 +60,7 @@ function BioCard() {
                         transition={{ duration: 0.6 }}
                     >
                         <p className="text-xs font-geist text-neon-blue tracking-widest uppercase mb-4">
-              // About Me
+                            {/* About Me */}
                         </p>
                         <h2 className="text-3xl md:text-4xl font-clash font-bold mb-6 min-h-[4rem] md:min-h-[5rem] flex items-center flex-wrap">
                             {TITLE_TEXT.split("").map((char, i) => (
@@ -116,7 +116,7 @@ function TechStackCard() {
         <SpotlightCard className="md:col-span-2" spotlightColor="rgba(139, 92, 246, 0.15)">
             <div className="p-6 h-full flex flex-col justify-between">
                 <p className="text-xs font-geist text-neon-purple tracking-widest uppercase mb-4">
-          // Tech Stack
+                    {/* Tech Stack */}
                 </p>
                 <div className="space-y-3">
                     <Marquee speed="25s">
@@ -152,7 +152,7 @@ function StatsCard() {
         <SpotlightCard className="md:col-span-2">
             <div className="p-6 h-full">
                 <p className="text-xs font-geist text-neon-blue tracking-widest uppercase mb-6">
-          // Impact
+                    {/* Impact */}
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                     <AnimatedCounter target={40} suffix="%" label="Faster Decisions" />
@@ -169,7 +169,7 @@ function SkillsTagCloud() {
         <SpotlightCard className="md:col-span-2" spotlightColor="rgba(139, 92, 246, 0.15)">
             <div className="p-6 h-full">
                 <p className="text-xs font-geist text-neon-purple tracking-widest uppercase mb-4">
-          // Skills
+                    {/* Skills */}
                 </p>
                 <div className="flex flex-wrap gap-2">
                     {SKILLS.map((skill, i) => (
