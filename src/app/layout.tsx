@@ -3,6 +3,7 @@ import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/smooth-scroll";
 import CustomCursor from "@/components/ui/custom-cursor";
 import Preloader from "../components/ui/preloader";
+import { Analytics } from "@vercel/analytics/next";
 
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ export default function RootLayout({
                     <CustomCursor />
                     {children}
                 </SmoothScrollProvider>
+                <Analytics />
             </body>
         </html>
     );
